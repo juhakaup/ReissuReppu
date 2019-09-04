@@ -1,5 +1,5 @@
 # ReissuReppu
-## Sovellus retkeilyvarustelistojen koostamiseen
+**Sovellus retkeilyvarustelistojen koostamiseen**
 
 Sovellus on tarkoitettu retkeilyä harrastavalle tai ratkeilystä kiinnostuneelle. 
 Kenen tahansa on mahdollista tarkistella olemassa olevia varustelistauksia ja ottaa niistä mallia omien listojen tekemiseen. 
@@ -12,3 +12,5 @@ Toimintoja:
 + Varusteiden syöttö ja muokkaus
 + Omien varusteiden valinta
 + Varustelistojen syöttö ja muokkaus
+
+[Tietokantakaavio](https://github.com/juhakaup/ReissuReppu/blob/master/doc/tsoha.png)
