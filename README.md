@@ -13,5 +13,7 @@ Toimintoja:
 + Varusteiden valinta omaan listaan
 
 [Tietokantakaavio](https://github.com/juhakaup/ReissuReppu/blob/master/documents/tsoha.png)
+
 [Käyttötapaukset](https://github.com/juhakaup/ReissuReppu/blob/master/documents/kayttotapaukset.md)
 
+[Linkki sovellukseen] (https://reissureppu.herokuapp.com/)
