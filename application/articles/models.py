@@ -8,5 +8,9 @@ class Article(db.Model):
     weight = db.Column(db.Integer)
     volume = db.Column(db.Numeric(5))
 
-    def __init__(self, name):
+    def __init__(self, name, brand, weight, volume, description):
         self.name = name
+        self.brand = brand
+        self.weight = weight
+        self.volume = volume
+        self.description = description

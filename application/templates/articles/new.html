@@ -1,8 +1,28 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<h1>Add new article</h1>
 <form method="POST" action="{{ url_for('article_create') }}">
-    <input type="text" name="name"/>
-    <input type="submit" value="Add new article"/>
+    <div>
+        <label>Name</label>
+        <input type="text" name="name"/>
+    </div>
+    <div>
+        <label>Brand</label>
+        <input type="text" name="brand"/>
+    </div>
+    <div>
+            <label>Weight</label>
+            <input type="number" name="weight" value = "0"/>
+    </div>
+    <div>
+            <label>Volume</label>
+            <input type="number" step="0.01" name="volume" value = "0"/>
+    </div>
+    <div>
+            <label>Description</label>
+            <textarea name="description"></textarea>
+    </div>
+    <input type="submit" value="Add"/>
 </form>
 {% endblock %}

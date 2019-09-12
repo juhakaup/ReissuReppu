@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <table>
+        <tr>
+            <th>Article</th>
+            <th>Brand</th>
+            <th>Weight</th>
+            <th>Volume</th>
+            <th>Description</th>
+        </tr>
+        {% for article in articles %}
+        <tr>
+            <td>{{ article.name }}</td>
+            <td>{{ article.brand }}</td>
+            <td>{{ article.weight }}</td>
+            <td>{{ article.volume }}</td>
+            <td>{{ article.description }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
