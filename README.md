@@ -3,7 +3,8 @@
 
 Sovellus retkeilyä harrastavalle tai retkeilystä kiinnostuneelle.
 Sovelluksessa kuka tahansa voi tarkistella sovellukseen talletettuja varustelistoja ja suunnitella niiden pohjalta omia varustelistojaan.
-Rekisteröitynyt käyttäjä voi myös luoda, muokata ja poistaa omia varustelistojaan sekä lisätä palveluun omia varusteitaan. Rekisteröitynyt käyttäjä voi myös merkitä olemassa olevia varusteita omaan listaansa, jolloin ne ovat käytettävissä varustelistoja laadittaessa.
+
+Rekisteröitynyt käyttäjä voi myös luoda, muokata ja poistaa omia varustelistojaan sekä lisätä palveluun omia varusteitaan. Rekisteröitynyt käyttäjä voi myös merkitä sovelluksessa olevia varusteita omaan listaansa, jolloin ne ovat käytettävissä omia varustelistoja laadittaessa.
 
 Toimintoja:
 + Kirjautuminen
@@ -16,4 +17,4 @@ Toimintoja:
 
 [Käyttötapaukset](https://github.com/juhakaup/ReissuReppu/blob/master/documents/kayttotapaukset.md)
 
-[Linkki sovellukseen] (https://reissureppu.herokuapp.com/)
+[Linkki sovellukseen](https://reissureppu.herokuapp.com/)
