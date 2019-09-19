@@ -18,3 +18,5 @@ Toimintoja:
 [Käyttötapaukset](https://github.com/juhakaup/ReissuReppu/blob/master/documents/kayttotapaukset.md)
 
 [Linkki sovellukseen](https://reissureppu.herokuapp.com/)
+
+Sovellukseen voi kirjautua tunnuksella: testitunnus salasana:salasana
