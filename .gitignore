@@ -125,4 +125,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-articles.db
+
+# database
+gearlists.db
+test.db

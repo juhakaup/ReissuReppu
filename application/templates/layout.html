@@ -6,10 +6,20 @@
 </head>
 
 <body>
+    {% if current_user.is_authenticated %}
+    <p>Logged in as {{ current_user.name }}
+    <a href="{{ url_for('auth_logout') }}">Logout</a></p>
+    {% else %}
+    <a href="{{ url_for('auth_login') }}">Login</a>
+    {% endif %}
+
     <ul>
-        <li><a href="{{ url_for('articles_index') }}">Gear list</a></li>
-        <li><a href="{{ url_for('articles_form') }}">Add new article</a></li>
+        <li><a href="{{ url_for('articles_index') }}">Items</a></li>
+        <li><a href="{{ url_for('articles_form') }}">Add new item</a></li>
+        <li><a href="{{ url_for('lists_index') }}">Gear listings</a></li>
+        <li><a href="{{ url_for('lists_form') }}">Add new listing</a></li>
     </ul>
+    
     {% block body %}
     <p>
         Content.

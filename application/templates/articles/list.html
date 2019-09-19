@@ -5,17 +5,21 @@
         <tr>
             <th>Article</th>
             <th>Brand</th>
+            <th>Category</th>
             <th>Weight</th>
             <th>Volume</th>
             <th>Description</th>
+            <th>Id</th>
         </tr>
         {% for article in articles %}
         <tr>
             <td>{{ article.name }}</td>
             <td>{{ article.brand }}</td>
+            <td>{{ article.category }}</td>
             <td>{{ article.weight }}</td>
             <td>{{ article.volume }}</td>
             <td>{{ article.description }}</td>
+            <td>{{ article.user }}</td>
         </tr>
         {% endfor %}
     </table>

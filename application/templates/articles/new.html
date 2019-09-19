@@ -4,24 +4,33 @@
 <h1>Add new article</h1>
 <form method="POST" action="{{ url_for('article_create') }}">
     <div>
-        <label>Name</label>
-        <input type="text" name="name"/>
+        {{ form.name.label }}
+        {{ form.name }}
+        <ul>
+        {% for error in form.name.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
     </div>
     <div>
-        <label>Brand</label>
-        <input type="text" name="brand"/>
+        {{ form.brand.label }}
+        {{ form.brand }}
     </div>
     <div>
-            <label>Weight</label>
-            <input type="number" name="weight" value = "0"/>
+        {{ form.category.label }}
+        {{ form.category }}
     </div>
     <div>
-            <label>Volume</label>
-            <input type="number" step="0.01" name="volume" value = "0"/>
+        {{ form.weight.label }}
+        {{ form.weight }}
     </div>
     <div>
-            <label>Description</label>
-            <textarea name="description"></textarea>
+        {{ form.volume.label }}
+        {{ form.volume }}
+    </div>
+    <div>
+        {{ form.description.label }}
+        {{ form.description }}
     </div>
     <input type="submit" value="Add"/>
 </form>

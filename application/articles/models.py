@@ -2,15 +2,13 @@ from application import db
 
 class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), nullable=False)
-    description = db.Column(db.String(255))
-    brand = db.Column(db.String(64))
+    user = db.Column(db.Integer, db.ForeignKey('account.id'))
+    name = db.Column(db.String(60), nullable=False)
+    category = db.Column(db.String(60))
+    brand = db.Column(db.String(60))
     weight = db.Column(db.Integer)
     volume = db.Column(db.Numeric(5))
+    description = db.Column(db.String(255))
 
-    def __init__(self, name, brand, weight, volume, description):
+    def __init__(self, name):
         self.name = name
-        self.brand = brand
-        self.weight = weight
-        self.volume = volume
-        self.description = description
