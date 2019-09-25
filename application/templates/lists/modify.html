@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>Edit gearlist</h1>
+
+<p>Gearlist: {{ gearlist.name }}</p>
+<p>Description: {{ gearlist.description }}</p>
+<br>
+<p>Gearlist items:</p>
+<table>
+    <tr>
+        <th>Article</th>
+        <th>Brand</th>
+        <th>Category</th>
+        <th>Weight</th>
+        <th>Volume</th>
+        <th>Description</th>
+    </tr>
+    {% for article in useritems %}
+    <tr>
+        <td>{{ article.name }}</td>
+        <td>{{ article.brand }}</td>
+        <td>{{ article.category }}</td>
+        <td>{{ article.weight }}</td>
+        <td>{{ article.volume }}</td>
+        <td>{{ article.description }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('rmItem_list',list_id=gearlist.id, item_id=article.id) }}">
+                <input type="submit" value="Remove"/>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<p>User items:</p>
+<table>
+    <tr>
+        <th>Article</th>
+        <th>Brand</th>
+        <th>Category</th>
+        <th>Weight</th>
+        <th>Volume</th>
+        <th>Description</th>
+    </tr>
+    {% for article in articles %}
+    <tr>
+        <td>{{ article.name }}</td>
+        <td>{{ article.brand }}</td>
+        <td>{{ article.category }}</td>
+        <td>{{ article.weight }}</td>
+        <td>{{ article.volume }}</td>
+        <td>{{ article.description }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('additem_list',list_id=gearlist.id, item_id=article.id) }}">
+                <input type="submit" value="Add"/>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

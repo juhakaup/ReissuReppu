@@ -12,6 +12,11 @@
             <td>{{ list.name }}</td>
             <td>{{ list.description }}</td>
             <td>{{ list.user }}</td>
+            <td>
+                <form method="GET" action="{{ url_for('modify_list',list_id=list.id) }}">
+                    <input type="submit" value="Modify"/>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>

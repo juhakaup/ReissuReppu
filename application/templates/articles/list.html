@@ -19,7 +19,17 @@
             <td>{{ article.weight }}</td>
             <td>{{ article.volume }}</td>
             <td>{{ article.description }}</td>
-            <td>{{ article.user }}</td>
+            <td>{{ article.id }}</td>
+            <td>
+                <form method="GET" action="{{ url_for('article_edit', article_id=article.id) }}">
+                    <input type="submit" value="Edit"/>
+                </form>
+            </td>
+            <td>
+                <form method="POST" action="{{ url_for('article_rm', article_id=article.id) }}">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>

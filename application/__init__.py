@@ -1,7 +1,7 @@
 from flask import Flask
 app = Flask(__name__)
 
-#db
+# db
 from flask_sqlalchemy import SQLAlchemy
 
 import os
@@ -14,7 +14,7 @@ else:
 
 db = SQLAlchemy(app)
 
-#app functionality
+# app functionality
 from application import views
 
 from application.articles import models
@@ -26,7 +26,7 @@ from application.auth import views
 from application.lists import models
 from application.lists import views
 
-#login
+# login
 from application.auth.models import User
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
@@ -42,7 +42,7 @@ login_manager.login_message = "Login required"
 def load_user(user_id):
     return User.query.get(user_id)
 
-#create db if needed
+# create db if needed
 try:
     db.create_all()
 except:

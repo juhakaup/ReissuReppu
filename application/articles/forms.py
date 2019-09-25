@@ -9,6 +9,7 @@ class ArticleForm(FlaskForm):
     weight = IntegerField("Weight", [validators.NumberRange(min=0)])
     volume = DecimalField("Volume", [validators.NumberRange(min=0)],  places=2, )
     description = StringField("Description")
+    id = IntegerField("id")
 
     class Meta:
         csrf = False
