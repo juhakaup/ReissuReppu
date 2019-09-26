@@ -32,7 +32,6 @@ class GearList(db.Model):
 
         for row in res:
             response = ({"weight":row[0], "volume":row[1]})
-            #response.append({"weight":row[0], "volume":row[1]})
         
         return response
         
