@@ -15,6 +15,8 @@ class User(db.Model):
 
     items = db.relationship("Article", backref='article', lazy=True)
 
+    gearlists = db.relationship("GearList", backref='gear_list', lazy=True)
+
     def __init__(self, email, password):
         email = email
         password = password

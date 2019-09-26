@@ -4,17 +4,22 @@ from application.articles.forms import ArticleForm
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
-# lists all the articles
+# Lists all the articles
 @app.route("/articles", methods=["GET"])
 def articles_index():
-    return render_template("articles/list.html", articles = Article.query.all())
+    usrArticles = None
+    if current_user.is_authenticated:
+        usrArticles = current_user.items
+        
+    return render_template("articles/list.html", articles = Article.query.all(), 
+                            usrArticles = usrArticles)
 
-# form for adding new article
+# Form for adding new article
 @app.route("/articles/new/")
 def articles_form():
     return render_template("articles/new.html", form = ArticleForm(), title = "Add new item", commit = "Add", edit=False)
 
-# adding new article to db
+# Adding new article to db
 @app.route("/articles/", methods=["POST"])
 @login_required
 def article_create():
@@ -31,7 +36,7 @@ def article_create():
 
     return redirect(url_for("articles_index"))
 
-# editing existing article
+# Editing existing article
 @app.route("/articles/edit/<article_id>", methods=["GET", "POST"])
 @login_required
 def article_edit(article_id):
@@ -59,7 +64,7 @@ def article_edit(article_id):
 
     return redirect(url_for("articles_index"))
 
-# update article with data from form
+# Update article with data from form
 def updateItem(article, form):
     article.name = form.name.data
     article.brand = form.brand.data
@@ -69,7 +74,7 @@ def updateItem(article, form):
     article.description = form.description.data
     article.user = current_user.id
 
-# delete article from db
+# Delete article from db
 @app.route("/articles/rm/<article_id>", methods=["POST"])
 @login_required
 def article_rm(article_id):

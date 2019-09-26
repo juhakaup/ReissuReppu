@@ -1,6 +1,27 @@
 {% extends "layout.html" %}
 
 {% block body %}
+    {% if not usrLists == None%}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Desciption</th>
+            <th>Author</th>
+        </tr>
+        {% for list in usrLists %}
+        <tr>
+            <td>{{ list.name }}</td>
+            <td>{{ list.description }}</td>
+            <td>{{ list.user }}</td>
+            <td>
+                <form method="GET" action="{{ url_for('modify_list',list_id=list.id) }}">
+                    <input type="submit" value="Modify"/>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
     <table>
         <tr>
             <th>Name</th>
@@ -14,7 +35,7 @@
             <td>{{ list.user }}</td>
             <td>
                 <form method="GET" action="{{ url_for('modify_list',list_id=list.id) }}">
-                    <input type="submit" value="Modify"/>
+                    <input type="submit" value="View" disabled/>
                 </form>
             </td>
         </tr>

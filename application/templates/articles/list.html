@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 
 {% block body %}
+    {% if not usrArticles == None %}
+    <p>User items</p>
     <table>
         <tr>
             <th>Article</th>
@@ -9,9 +11,8 @@
             <th>Weight</th>
             <th>Volume</th>
             <th>Description</th>
-            <th>Id</th>
         </tr>
-        {% for article in articles %}
+        {% for article in usrArticles %}
         <tr>
             <td>{{ article.name }}</td>
             <td>{{ article.brand }}</td>
@@ -19,7 +20,6 @@
             <td>{{ article.weight }}</td>
             <td>{{ article.volume }}</td>
             <td>{{ article.description }}</td>
-            <td>{{ article.id }}</td>
             <td>
                 <form method="GET" action="{{ url_for('article_edit', article_id=article.id) }}">
                     <input type="submit" value="Edit"/>
@@ -30,6 +30,36 @@
                     <input type="submit" value="Delete"/>
                 </form>
             </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <p>All items</p>
+    <table>
+        <tr>
+            <th>Article</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Weight</th>
+            <th>Volume</th>
+            <th>Description</th>
+        </tr>
+        {% for article in articles %}
+        <tr>
+            <td>{{ article.name }}</td>
+            <td>{{ article.brand }}</td>
+            <td>{{ article.category }}</td>
+            <td>{{ article.weight }}</td>
+            <td>{{ article.volume }}</td>
+            <td>{{ article.description }}</td>
+            {% if current_user.is_authenticated %}
+            <td>
+                <form method="GET" action="{{ url_for('article_edit', article_id=article.id) }}">
+                    <input type="submit" value="Add to my items"/>
+                </form>
+            </td>>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

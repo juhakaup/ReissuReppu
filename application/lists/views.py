@@ -4,16 +4,27 @@ from application.lists.forms import ListsForm
 from application.articles.models import Article
 from flask_login import login_required, current_user
 
-#flask
+# flask
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required
 
-#listing gearlists
+# Listing gearlists
 @app.route("/lists", methods=["GET"])
 def lists_index():
-    return render_template("lists/list.html", lists = GearList.query.all())
+    usrLists = None
+    if current_user.is_authenticated:
+        usrLists = current_user.gearlists
 
-#adding new gearlist
+    return render_template("lists/list.html", 
+                            lists = GearList.query.all(), usrLists = usrLists)
+
+# New gearlist form
+@app.route("/lists/new/")
+@login_required
+def lists_form():
+    return render_template("lists/new.html", form = ListsForm())
+
+# Adding new gearlist
 @app.route("/lists", methods=["POST"])
 @login_required
 def list_create():
@@ -27,25 +38,21 @@ def list_create():
     db.session().commit()
     return redirect(url_for("lists_index"))
 
-#new gearlist form
-@app.route("/lists/new/")
-@login_required
-def lists_form():
-    return render_template("lists/new.html", form = ListsForm())
-
-# modify excisting gearlist
+# Modify existing gearlist todo:delete gearlist
 @app.route("/lists/<list_id>", methods=["GET", "POST"])
 @login_required
 def modify_list(list_id):
     gearlist = GearList.query.get(list_id)
+    params = GearList.items_weight_volume(list_id)
 
     if request.method == "GET":
         return render_template("lists/modify.html", 
                                 gearlist = gearlist, 
-                                articles = Article.query.all(),
-                                useritems = gearlist.articles)
+                                articles = current_user.items, 
+                                useritems = gearlist.articles,
+                                params = params)
 
-# adding items to a gearlist
+# Adding items to a gearlist
 @app.route("/lists/<list_id>/<item_id>", methods=["POST"])
 @login_required
 def additem_list(list_id, item_id):
@@ -56,11 +63,11 @@ def additem_list(list_id, item_id):
     db.session.commit()
     
     return render_template("lists/modify.html", 
-                                gearlist = gearlist, 
-                                articles = Article.query.all(),
-                                useritems = gearlist.articles)
+                            gearlist = gearlist, 
+                            articles = current_user.items,
+                            useritems = gearlist.articles)
 
-# remove item from gearlist
+# Remove item from a gearlist
 @app.route("/lists/rm/<list_id>/<item_id>", methods=["POST"])
 @login_required
 def rmItem_list(list_id, item_id):
@@ -71,6 +78,6 @@ def rmItem_list(list_id, item_id):
     db.session.commit()
 
     return render_template("lists/modify.html", 
-                                gearlist = gearlist, 
-                                articles = Article.query.all(),
-                                useritems = gearlist.articles)
+                            gearlist = gearlist, 
+                            articles = current_user.items,
+                            useritems = gearlist.articles)

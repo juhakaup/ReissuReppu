@@ -1,4 +1,5 @@
 from application import db
+from sqlalchemy.sql import text
 
 # gearlist articles table
 listItems = db.Table('list_items',
@@ -18,3 +19,20 @@ class GearList(db.Model):
 
     def __init__(self, name):
         self.name = name
+
+    @staticmethod
+    def items_weight_volume(list_id):
+        stmt = text("SELECT SUM(weight), SUM(volume) "
+        "FROM article LEFT JOIN list_items ON article.id = list_items.article_id "
+        "WHERE list_id = :list_id;").params(list_id=list_id)
+    
+        res = db.engine.execute(stmt)
+
+        response = {}
+
+        for row in res:
+            response = ({"weight":row[0], "volume":row[1]})
+            #response.append({"weight":row[0], "volume":row[1]})
+        
+        return response
+        
