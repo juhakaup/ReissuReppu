@@ -13,8 +13,12 @@
         {{ form.password }}
     </div>
     <div>
-    <input type="submit" value="login"/>
+    <input type="submit" value="Login"/>
 </div>
+</form>
+<p>Or crate a new account</p>
+<form method="GET" action="{{ url_for('register_user') }}">
+    <input type="submit" value="Create new account"/>
 </form>
 
 {% endblock %}

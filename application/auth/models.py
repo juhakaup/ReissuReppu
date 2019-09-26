@@ -14,12 +14,11 @@ class User(db.Model):
     password = db.Column(db.String(144), nullable=False)
 
     items = db.relationship("Article", backref='article', lazy=True)
-
     gearlists = db.relationship("GearList", backref='gear_list', lazy=True)
 
     def __init__(self, email, password):
-        email = email
-        password = password
+        self.email = email
+        self.password = password
 
     def get_id(self):
         return self.id
