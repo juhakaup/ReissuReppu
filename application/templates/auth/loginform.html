@@ -1,24 +1,25 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{{ error }}
 
-<form method="POST" action="{{ url_for('auth_login') }}">
+<form method="POST" class="main-form" action="{{ url_for('auth_login') }}">
     <div>
         {{ form.email.label }}
-        {{ form.email }}
+        {{ form.email(class="form-control") }}
     </div>
     <div>
         {{ form.password.label }}
-        {{ form.password }}
+        {{ form.password(class="form-control") }}
     </div>
     <div>
-    <input type="submit" value="Login"/>
-</div>
+        <input type="submit" value="Login" class="btn btn-success" />
+    </div>
 </form>
-<p>Or crate a new account</p>
-<form method="GET" action="{{ url_for('register_user') }}">
-    <input type="submit" value="Create new account"/>
-</form>
+<div>
+    <form method="GET" class="main-form" action="{{ url_for('register_user') }}">
+    <p>Or you can</p>
+    <input type="submit" value="Create a new account" class="btn btn-outline-info" />
+    </form>
+</div>    
 
 {% endblock %}

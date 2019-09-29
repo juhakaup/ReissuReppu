@@ -1,19 +1,24 @@
 {% extends "layout.html" %}
 
 {% block body %}
+
+<div style="width: 700px; margin: auto">
+
     {% if not usrArticles == None %}
     <p>User items</p>
-    <table>
-        <tr>
+    <table class="table table-sm table-striped">
+        <thead>
             <th>Article</th>
             <th>Brand</th>
             <th>Category</th>
             <th>Weight</th>
             <th>Volume</th>
             <th>Description</th>
-        </tr>
+            <th></th>
+            <th></th>
+        </thead>
         {% for article in usrArticles %}
-        <tr>
+        <tbody>
             <td>{{ article.name }}</td>
             <td>{{ article.brand }}</td>
             <td>{{ article.category }}</td>
@@ -22,21 +27,22 @@
             <td>{{ article.description }}</td>
             <td>
                 <form method="GET" action="{{ url_for('article_edit', article_id=article.id) }}">
-                    <input type="submit" value="Edit"/>
+                    <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
                 </form>
             </td>
             <td>
                 <form method="POST" action="{{ url_for('article_rm', article_id=article.id) }}">
-                    <input type="submit" value="Delete"/>
+                    <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger" />
                 </form>
             </td>
-        </tr>
+        </thead>
         {% endfor %}
     </table>
     {% endif %}
-
+    <br>
+    
     <p>All items</p>
-    <table>
+    <table class="table table-sm table-striped">
         <tr>
             <th>Article</th>
             <th>Brand</th>
@@ -44,6 +50,7 @@
             <th>Weight</th>
             <th>Volume</th>
             <th>Description</th>
+            <th></th>
         </tr>
         {% for article in articles %}
         <tr>
@@ -53,14 +60,14 @@
             <td>{{ article.weight }}</td>
             <td>{{ article.volume }}</td>
             <td>{{ article.description }}</td>
-            {% if current_user.is_authenticated %}
             <td>
                 <form method="GET" action="{{ url_for('article_edit', article_id=article.id) }}">
-                    <input type="submit" value="Add to my items"/>
+                    <input type="submit" value="Add to my items" class="btn btn-sm btn-outline-success" {% if not current_user.is_authenticated %} disabled {% endif %} />
                 </form>
-            </td>>
-            {% endif %}
+            </td>
+            
         </tr>
         {% endfor %}
     </table>
+</div>
 {% endblock %}

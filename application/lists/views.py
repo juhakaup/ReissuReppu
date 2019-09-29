@@ -12,11 +12,15 @@ from flask_login import login_required
 @app.route("/lists", methods=["GET"])
 def lists_index():
     usrLists = None
+    
     if current_user.is_authenticated:
-        usrLists = current_user.gearlists
+        usrLists = GearList.user_lists(current_user.id)#current_user.gearlists
+        lists = GearList.not_user_lists(1)
+    else:
+        lists = GearList.not_user_lists(-1)
 
     return render_template("lists/list.html", 
-                            lists = GearList.query.all(), usrLists = usrLists)
+                            lists = lists, usrLists = usrLists)
 
 # New gearlist form
 @app.route("/lists/new/")
