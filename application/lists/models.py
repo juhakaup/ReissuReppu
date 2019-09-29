@@ -34,4 +34,39 @@ class GearList(db.Model):
             response = ({"weight":row[0], "volume":row[1]})
         
         return response
+    
+    @staticmethod
+    def not_user_lists(user_id):
+        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(article.weight), SUM(article.volume) FROM article "
+                    "LEFT JOIN list_items ON article.id = list_items.article_id "
+                    "LEFT JOIN gear_list ON list_items.list_id = gear_list.id "
+                    "LEFT JOIN account ON gear_list.user = account.id "
+                    "WHERE NOT account.id = :user_id "
+                    "GROUP BY list_items.list_id;").params(user_id=user_id)
+    
+        res = db.engine.execute(stmt)
+
+        response = []
+
+        for row in res:
+            response.append ({"list_id":row[0], "name":row[1], "description":row[2], "username":row[3], "weight":row[4], "volume":row[5]})
         
+        return response
+
+    @staticmethod
+    def user_lists(user_id):
+        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(article.weight), SUM(article.volume) FROM article "
+                    "LEFT JOIN list_items ON article.id = list_items.article_id "
+                    "LEFT JOIN gear_list ON list_items.list_id = gear_list.id "
+                    "LEFT JOIN account ON gear_list.user = account.id "
+                    "WHERE account.id = :user_id "
+                    "GROUP BY list_items.list_id;").params(user_id=user_id)
+    
+        res = db.engine.execute(stmt)
+
+        response = []
+
+        for row in res:
+            response.append ({"list_id":row[0], "name":row[1], "description":row[2], "username":row[3], "weight":row[4], "volume":row[5]})
+        
+        return response
