@@ -23,8 +23,8 @@ from application.articles import views
 from application.auth import models
 from application.auth import views
 
-from application.lists import models
-from application.lists import views
+from application.gearlists import models
+from application.gearlists import views
 
 # login
 from application.auth.models import User

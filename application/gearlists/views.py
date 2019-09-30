@@ -1,6 +1,6 @@
 from application import app, db
-from application.lists.models import GearList
-from application.lists.forms import ListsForm
+from application.gearlists.models import GearList
+from application.gearlists.forms import ListsForm
 from application.articles.models import Article
 from flask_login import login_required, current_user
 
@@ -19,14 +19,14 @@ def lists_index():
     else:
         lists = GearList.not_user_lists(-1)
 
-    return render_template("lists/list.html", 
+    return render_template("gearlists/list.html", 
                             lists = lists, usrLists = usrLists)
 
 # New gearlist form
 @app.route("/lists/new/")
 @login_required
 def lists_form():
-    return render_template("lists/new.html", form = ListsForm())
+    return render_template("gearlists/new.html", form = ListsForm())
 
 # Adding new gearlist
 @app.route("/lists", methods=["POST"])
@@ -40,7 +40,7 @@ def list_create():
 
     db.session().add(t)
     db.session().commit()
-    return redirect(url_for("lists_index"))
+    return redirect(url_for("gearlists_index"))
 
 # Modify existing gearlist todo:delete gearlist
 @app.route("/lists/<list_id>", methods=["GET", "POST"])
@@ -50,7 +50,7 @@ def modify_list(list_id):
     params = GearList.items_weight_volume(list_id)
 
     if request.method == "GET":
-        return render_template("lists/modify.html", 
+        return render_template("gearlists/modify.html", 
                                 gearlist = gearlist, 
                                 articles = current_user.items, 
                                 useritems = gearlist.articles,
@@ -66,7 +66,7 @@ def additem_list(list_id, item_id):
     gearlist.articles.append(item)
     db.session.commit()
     
-    return render_template("lists/modify.html", 
+    return render_template("gearlists/modify.html", 
                             gearlist = gearlist, 
                             articles = current_user.items,
                             useritems = gearlist.articles)
@@ -81,7 +81,7 @@ def rmItem_list(list_id, item_id):
     gearlist.articles.remove(item)
     db.session.commit()
 
-    return render_template("lists/modify.html", 
+    return render_template("gearlists/modify.html", 
                             gearlist = gearlist, 
                             articles = current_user.items,
                             useritems = gearlist.articles)
