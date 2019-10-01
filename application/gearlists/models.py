@@ -14,7 +14,7 @@ class GearList(db.Model):
     description = db.Column(db.String(300))
 
     # gearlist <-> items reference
-    itmes = db.relationship('Item', secondary=listItems, 
+    items = db.relationship('Item', secondary=listItems, 
             backref=db.backref('items'), lazy = 'dynamic')
 
     def __init__(self, name):
@@ -37,12 +37,13 @@ class GearList(db.Model):
     
     @staticmethod
     def not_user_lists(user_id):
-        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(item.weight), SUM(item.volume) FROM item "
-                    "LEFT JOIN list_items ON item.id = list_items.item_id "
-                    "LEFT JOIN gear_list ON list_items.list_id = gear_list.id "
+        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(item.weight), SUM(item.volume) "
+                    "FROM gear_list "
                     "LEFT JOIN account ON gear_list.user = account.id "
+                    "LEFT JOIN list_items ON gear_list.id = list_items.list_id "
+                    "LEFT JOIN item ON list_items.item_id = item.id "
                     "WHERE NOT account.id = :user_id "
-                    "GROUP BY list_items.list_id;").params(user_id=user_id)
+                    "GROUP BY gear_list.id").params(user_id=user_id)
     
         res = db.engine.execute(stmt)
 
@@ -55,12 +56,13 @@ class GearList(db.Model):
 
     @staticmethod
     def user_lists(user_id):
-        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(item.weight), SUM(item.volume) FROM item "
-                    "LEFT JOIN list_items ON item.id = list_items.item_id "
-                    "LEFT JOIN gear_list ON list_items.list_id = gear_list.id "
+        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(item.weight), SUM(item.volume) "
+                    "FROM gear_list "
                     "LEFT JOIN account ON gear_list.user = account.id "
+                    "LEFT JOIN list_items ON gear_list.id = list_items.list_id "
+                    "LEFT JOIN item ON list_items.item_id = item.id "
                     "WHERE account.id = :user_id "
-                    "GROUP BY list_items.list_id;").params(user_id=user_id)
+                    "GROUP BY gear_list.id").params(user_id=user_id)
     
         res = db.engine.execute(stmt)
 
