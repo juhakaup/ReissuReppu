@@ -13,7 +13,7 @@ class User(db.Model):
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(144), nullable=False)
 
-    items = db.relationship("Article", backref='article', lazy=True)
+    items = db.relationship("Item", backref='item', lazy=True)
     gearlists = db.relationship("GearList", backref='gear_list', lazy=True)
 
     def __init__(self, email, password):

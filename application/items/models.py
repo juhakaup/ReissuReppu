@@ -1,6 +1,6 @@
 from application import db
 
-class Article(db.Model):
+class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('account.id'))
     name = db.Column(db.String(60), nullable=False)

@@ -1,10 +1,10 @@
 from application import db
 from sqlalchemy.sql import text
 
-# gearlist articles table
+# gearlist items table
 listItems = db.Table('list_items',
     db.Column('list_id',db.Integer, db.ForeignKey('gear_list.id')),
-    db.Column('article_id',db.Integer, db.ForeignKey('article.id'))
+    db.Column('item_id',db.Integer, db.ForeignKey('item.id'))
 )
 
 class GearList(db.Model):
@@ -13,8 +13,8 @@ class GearList(db.Model):
     name = db.Column(db.String(60))
     description = db.Column(db.String(300))
 
-    # gearlist <-> articles reference
-    articles = db.relationship('Article', secondary=listItems, 
+    # gearlist <-> items reference
+    itmes = db.relationship('Item', secondary=listItems, 
             backref=db.backref('items'), lazy = 'dynamic')
 
     def __init__(self, name):
@@ -23,7 +23,7 @@ class GearList(db.Model):
     @staticmethod
     def items_weight_volume(list_id):
         stmt = text("SELECT SUM(weight), SUM(volume) "
-        "FROM article LEFT JOIN list_items ON article.id = list_items.article_id "
+        "FROM item LEFT JOIN list_items ON item.id = list_items.item_id "
         "WHERE list_id = :list_id;").params(list_id=list_id)
     
         res = db.engine.execute(stmt)
@@ -37,8 +37,8 @@ class GearList(db.Model):
     
     @staticmethod
     def not_user_lists(user_id):
-        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(article.weight), SUM(article.volume) FROM article "
-                    "LEFT JOIN list_items ON article.id = list_items.article_id "
+        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(item.weight), SUM(item.volume) FROM item "
+                    "LEFT JOIN list_items ON item.id = list_items.item_id "
                     "LEFT JOIN gear_list ON list_items.list_id = gear_list.id "
                     "LEFT JOIN account ON gear_list.user = account.id "
                     "WHERE NOT account.id = :user_id "
@@ -55,8 +55,8 @@ class GearList(db.Model):
 
     @staticmethod
     def user_lists(user_id):
-        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(article.weight), SUM(article.volume) FROM article "
-                    "LEFT JOIN list_items ON article.id = list_items.article_id "
+        stmt = text("SELECT gear_list.id, gear_list.name, gear_list.description, account.name, SUM(item.weight), SUM(item.volume) FROM item "
+                    "LEFT JOIN list_items ON item.id = list_items.item_id "
                     "LEFT JOIN gear_list ON list_items.list_id = gear_list.id "
                     "LEFT JOIN account ON gear_list.user = account.id "
                     "WHERE account.id = :user_id "

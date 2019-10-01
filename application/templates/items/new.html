@@ -4,9 +4,9 @@
 <h1>{{ title }}</h1>
 
 {% if edit == True %}
-<form method="POST" action="{{ url_for('article_edit', article_id=form.id.data) }}">
+<form method="POST" action="{{ url_for('item_edit', item_id=form.id.data) }}">
 {% else %}
-<form method="POST" action="{{ url_for('article_create') }}">
+<form method="POST" action="{{ url_for('item_create') }}">
 {% endif %}
     <div>
         {{ form.name.label }}

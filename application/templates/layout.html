@@ -13,8 +13,8 @@
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="{{ url_for('lists_index') }}">Gearlists</a>
             <a class="p-2 text-dark" href="{{ url_for('lists_form') }}">New Gearlist</a>
-            <a class="p-2 text-dark" href="{{ url_for('articles_index') }}">Browse Items</a>
-            <a class="p-2 text-dark" href="{{ url_for('articles_form') }}">Add New Item</a>
+            <a class="p-2 text-dark" href="{{ url_for('items_index') }}">Browse Items</a>
+            <a class="p-2 text-dark" href="{{ url_for('items_form') }}">Add New Item</a>
         </nav>
 
         {% if current_user.is_authenticated %}

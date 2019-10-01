@@ -4,11 +4,11 @@
 
 <div style="width: 700px; margin: auto">
 
-    {% if not usrArticles == None %}
+    {% if not usrItems == None %}
     <p>User items</p>
     <table class="table table-sm table-striped">
         <thead>
-            <th>Article</th>
+            <th>Item</th>
             <th>Brand</th>
             <th>Category</th>
             <th>Weight</th>
@@ -17,21 +17,21 @@
             <th></th>
             <th></th>
         </thead>
-        {% for article in usrArticles %}
+        {% for item in userItems %}
         <tbody>
-            <td>{{ article.name }}</td>
-            <td>{{ article.brand }}</td>
-            <td>{{ article.category }}</td>
-            <td>{{ article.weight }}</td>
-            <td>{{ article.volume }}</td>
-            <td>{{ article.description }}</td>
+            <td>{{ items.name }}</td>
+            <td>{{ items.brand }}</td>
+            <td>{{ items.category }}</td>
+            <td>{{ items.weight }}</td>
+            <td>{{ items.volume }}</td>
+            <td>{{ items.description }}</td>
             <td>
-                <form method="GET" action="{{ url_for('article_edit', article_id=article.id) }}">
+                <form method="GET" action="{{ url_for('item_edit', item_id=item.id) }}">
                     <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
                 </form>
             </td>
             <td>
-                <form method="POST" action="{{ url_for('article_rm', article_id=article.id) }}">
+                <form method="POST" action="{{ url_for('item_rm', item_id=item.id) }}">
                     <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger" />
                 </form>
             </td>
@@ -44,7 +44,7 @@
     <p>All items</p>
     <table class="table table-sm table-striped">
         <tr>
-            <th>Article</th>
+            <th>Item</th>
             <th>Brand</th>
             <th>Category</th>
             <th>Weight</th>
@@ -52,16 +52,16 @@
             <th>Description</th>
             <th></th>
         </tr>
-        {% for article in articles %}
+        {% for item in items %}
         <tr>
-            <td>{{ article.name }}</td>
-            <td>{{ article.brand }}</td>
-            <td>{{ article.category }}</td>
-            <td>{{ article.weight }}</td>
-            <td>{{ article.volume }}</td>
-            <td>{{ article.description }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.brand }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.weight }}</td>
+            <td>{{ item.volume }}</td>
+            <td>{{ item.description }}</td>
             <td>
-                <form method="GET" action="{{ url_for('article_edit', article_id=article.id) }}">
+                <form method="GET" action="{{ url_for('item_edit', item_id=item.id) }}">
                     <input type="submit" value="Add to my items" class="btn btn-sm btn-outline-success" {% if not current_user.is_authenticated %} disabled {% endif %} />
                 </form>
             </td>

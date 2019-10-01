@@ -4,7 +4,7 @@
 
 <div style="width: 700px; margin: auto">
 
-    {% if not usrLists == None%}
+    {% if not userLists == None %}
     <p>User gearlists</p>
     <table class="table table-sm table-striped">
         <tr>
@@ -14,7 +14,7 @@
             <th>Volume</th>
             <th></th>
         </tr>
-        {% for list in usrLists %}
+        {% for list in userLists %}
         <tr>
             <td>{{ list.name }}</td>
             <td>{{ list.description }}</td>
@@ -41,7 +41,7 @@
             <th>Volume</th>
             <th></th>
         </tr>
-        {% for list in lists %}
+        {% for list in allLists %}
         <tr>
             <td>{{ list.name }}</td>
             <td><span class="d-inline-block text-truncate" style="max-width: 250px;">{{ list.description }}</span></td>

@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DecimalField, validators
 
-class ArticleForm(FlaskForm):
+class ItemForm(FlaskForm):
     name = StringField("Name", [validators.Length(min=2)])
     user = IntegerField("User")
     brand = StringField("Brand", [validators.Length(min=2)])

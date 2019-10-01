@@ -10,23 +10,23 @@
 <p>Gearlist items:</p>
 <table>
     <tr>
-        <th>Article</th>
+        <th>Item</th>
         <th>Brand</th>
         <th>Category</th>
         <th>Weight</th>
         <th>Volume</th>
         <th>Description</th>
     </tr>
-    {% for article in useritems %}
+    {% for item in useritems %}
     <tr>
-        <td>{{ article.name }}</td>
-        <td>{{ article.brand }}</td>
-        <td>{{ article.category }}</td>
-        <td>{{ article.weight }}</td>
-        <td>{{ article.volume }}</td>
-        <td>{{ article.description }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.brand }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.weight }}</td>
+        <td>{{ item.volume }}</td>
+        <td>{{ item.description }}</td>
         <td>
-            <form method="POST" action="{{ url_for('rmItem_list',list_id=gearlist.id, item_id=article.id) }}">
+            <form method="POST" action="{{ url_for('rmItem_list',list_id=gearlist.id, item_id=item.id) }}">
                 <input type="submit" value="Remove"/>
             </form>
         </td>
@@ -37,23 +37,23 @@
 <p>User items:</p>
 <table>
     <tr>
-        <th>Article</th>
+        <th>Item</th>
         <th>Brand</th>
         <th>Category</th>
         <th>Weight</th>
         <th>Volume</th>
         <th>Description</th>
     </tr>
-    {% for article in articles %}
+    {% for item in items %}
     <tr>
-        <td>{{ article.name }}</td>
-        <td>{{ article.brand }}</td>
-        <td>{{ article.category }}</td>
-        <td>{{ article.weight }}</td>
-        <td>{{ article.volume }}</td>
-        <td>{{ article.description }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.brand }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.weight }}</td>
+        <td>{{ item.volume }}</td>
+        <td>{{ item.description }}</td>
         <td>
-            <form method="POST" action="{{ url_for('additem_list',list_id=gearlist.id, item_id=article.id) }}">
+            <form method="POST" action="{{ url_for('additem_list',list_id=gearlist.id, item_id=item.id) }}">
                 <input type="submit" value="Add"/>
             </form>
         </td>
