@@ -4,7 +4,7 @@
 
 <div style="width: 700px; margin: auto">
 
-    {% if not usrItems == None %}
+    {% if not userItems == None %}
     <p>User items</p>
     <table class="table table-sm table-striped">
         <thead>
@@ -19,12 +19,12 @@
         </thead>
         {% for item in userItems %}
         <tbody>
-            <td>{{ items.name }}</td>
-            <td>{{ items.brand }}</td>
-            <td>{{ items.category }}</td>
-            <td>{{ items.weight }}</td>
-            <td>{{ items.volume }}</td>
-            <td>{{ items.description }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.brand }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.weight }}</td>
+            <td>{{ item.volume }}</td>
+            <td>{{ item.description }}</td>
             <td>
                 <form method="GET" action="{{ url_for('item_edit', item_id=item.id) }}">
                     <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
@@ -61,7 +61,7 @@
             <td>{{ item.volume }}</td>
             <td>{{ item.description }}</td>
             <td>
-                <form method="GET" action="{{ url_for('item_edit', item_id=item.id) }}">
+                <form method="POST" action="{{ url_for('item_copy', item_id=item.id) }}">
                     <input type="submit" value="Add to my items" class="btn btn-sm btn-outline-success" {% if not current_user.is_authenticated %} disabled {% endif %} />
                 </form>
             </td>

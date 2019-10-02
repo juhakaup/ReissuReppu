@@ -1,64 +1,66 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>Edit gearlist</h1>
 
-<p>Gearlist: {{ gearlist.name }}</p>
-<p>Description: {{ gearlist.description }}</p>
-<p>Total weight: {{ params.weight }}g.  Total volume: {{ params.volume }}l.</p>
-<br>
-<p>Gearlist items:</p>
-<table>
-    <tr>
-        <th>Item</th>
-        <th>Brand</th>
-        <th>Category</th>
-        <th>Weight</th>
-        <th>Volume</th>
-        <th>Description</th>
-    </tr>
-    {% for item in useritems %}
-    <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.brand }}</td>
-        <td>{{ item.category }}</td>
-        <td>{{ item.weight }}</td>
-        <td>{{ item.volume }}</td>
-        <td>{{ item.description }}</td>
-        <td>
-            <form method="POST" action="{{ url_for('rmItem_list',list_id=gearlist.id, item_id=item.id) }}">
-                <input type="submit" value="Remove"/>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-<br>
-<p>User items:</p>
-<table>
-    <tr>
-        <th>Item</th>
-        <th>Brand</th>
-        <th>Category</th>
-        <th>Weight</th>
-        <th>Volume</th>
-        <th>Description</th>
-    </tr>
-    {% for item in items %}
-    <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.brand }}</td>
-        <td>{{ item.category }}</td>
-        <td>{{ item.weight }}</td>
-        <td>{{ item.volume }}</td>
-        <td>{{ item.description }}</td>
-        <td>
-            <form method="POST" action="{{ url_for('additem_list',list_id=gearlist.id, item_id=item.id) }}">
-                <input type="submit" value="Add"/>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+<div style="width: 700px; margin: auto">
+    <h1>Edit gearlist</h1>
 
+    <p>Gearlist: {{ gearlist.name }}</p>
+    <p>Description: {{ gearlist.description }}</p>
+    <p>Total weight: {{ params.weight }}g. Total volume: {{ params.volume }}l.</p>
+    <br>
+    <p>Gearlist items:</p>
+    <table class="table table-sm table-striped">
+        <tr>
+            <th>Item</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Weight</th>
+            <th>Volume</th>
+            <th>Description</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.brand }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.weight }}</td>
+            <td>{{ item.volume }}</td>
+            <td>{{ item.description }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('rmItem_list',list_id=gearlist.id, item_id=item.id) }}">
+                    <input type="submit" value="Remove" class="btn btn-sm btn-outline-danger" />
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <p>User items:</p>
+    <table class="table table-sm table-striped">
+        <tr>
+            <th>Item</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Weight</th>
+            <th>Volume</th>
+            <th>Description</th>
+        </tr>
+        {% for item in availableItems %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.brand }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.weight }}</td>
+            <td>{{ item.volume }}</td>
+            <td>{{ item.description }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('additem_list',list_id=gearlist.id, item_id=item.id) }}">
+                    <input type="submit" value="Add" class="btn btn-sm btn-outline-info" />
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}

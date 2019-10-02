@@ -14,8 +14,8 @@ def lists_index():
     userLists = None
     
     if current_user.is_authenticated:
-        userLists = GearList.user_lists(current_user.id)#current_user.gearlists
-        allLists = GearList.not_user_lists(1)
+        userLists = GearList.user_lists(current_user.id)
+        allLists = GearList.not_user_lists(current_user.id)
     else:
         allLists = GearList.not_user_lists(-1)
 
@@ -48,13 +48,13 @@ def list_create():
 def modify_list(list_id):
     gearlist = GearList.query.get(list_id)
     params = GearList.items_weight_volume(list_id)
+    availableItems = Item.gearlist_available_items(list_id, current_user.id)
 
-    if request.method == "GET":
-        return render_template("gearlists/modify.html", 
-                                gearlist = gearlist, 
-                                items = current_user.items, 
-                                useritems = gearlist.items,
-                                params = params)
+    return render_template("gearlists/modify.html", 
+                            gearlist = gearlist, 
+                            items = gearlist.items, 
+                            availableItems = availableItems,
+                            params = params)
 
 # Adding items to a gearlist
 @app.route("/lists/<list_id>/<item_id>", methods=["POST"])
@@ -62,26 +62,34 @@ def modify_list(list_id):
 def additem_list(list_id, item_id):
     gearlist = GearList.query.get(list_id)
     item = Item.query.get(item_id)
+    params = GearList.items_weight_volume(list_id)
 
     gearlist.items.append(item)
     db.session.commit()
-    
+
+    availableItems = Item.gearlist_available_items(list_id, current_user.id)
+
     return render_template("gearlists/modify.html", 
                             gearlist = gearlist, 
-                            items = current_user.items,
-                            useritems = gearlist.items)
+                            items = gearlist.items,
+                            availableItems = availableItems,
+                            params = params)
 
 # Remove item from a gearlist
 @app.route("/lists/rm/<list_id>/<item_id>", methods=["POST"])
 @login_required
 def rmItem_list(list_id, item_id):
     gearlist = GearList.query.get(list_id)
-    item = Items.query.get(item_id)
+    item = Item.query.get(item_id)
+    params = GearList.items_weight_volume(list_id)
 
     gearlist.items.remove(item)
     db.session.commit()
 
+    availableItems = Item.gearlist_available_items(list_id, current_user.id)
+
     return render_template("gearlists/modify.html", 
                             gearlist = gearlist, 
-                            items = current_user.items,
-                            useritems = gearlist.items)
+                            items = gearlist.items,
+                            availableItems = availableItems,
+                            params = params)
