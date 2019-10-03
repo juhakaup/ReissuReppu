@@ -30,16 +30,21 @@ def auth_login():
 def register_user():
     # Registeration form
     if request.method == "GET":
-        return render_template("auth/new.html", form = RegisterForm())
+        return render_template("auth/new.html", form = RegisterForm(), error="")
     
     # Form validation
     form = RegisterForm(request.form) 
     if not form.validate():
-        return render_template("auth/new.html", form = form)
+        return render_template("auth/new.html", form = form, error="")
 
-    # Adding new user to db
     user = User(form.email.data, form.password.data)
     user.name = form.name.data
+
+    # Check for existing user with the same email
+    if User.query.filter_by(email=user.email).first():
+        return render_template("auth/new.html", form = form, error="An account with this email already exists")
+    
+    # Adding new user to db
     db.session().add(user)
     db.session().commit()
     return redirect(url_for("auth_login"))
