@@ -34,4 +34,3 @@ class User(db.Model):
 
     def roles(self):
         return ["ADMIN"]
-        

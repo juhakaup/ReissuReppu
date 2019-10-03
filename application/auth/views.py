@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
 
-from application import app, db
+from application import app, db, login_required
 from application.auth.models import User
 from application.auth.forms import LoginForm, RegisterForm
 
@@ -54,3 +54,15 @@ def register_user():
 def auth_logout():
     logout_user()
     return redirect(url_for("index"))
+
+# Userlist
+@app.route("/auth/")
+@login_required(role="ADMIN")
+def list_users():
+    users = User.query.all()
+    for user in users:
+        print(user.name)
+
+    return redirect(url_for("lists_index"))
+
+
