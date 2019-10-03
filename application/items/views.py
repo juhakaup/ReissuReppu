@@ -18,23 +18,22 @@ def items_index():
         
     return render_template("items/list.html", items = otherItems, userItems = userItems)
 
-# Form for adding new item
-@app.route("/items/new/")
-def items_form():
-    return render_template("items/new.html", form = ItemForm(), title = "Add new item", commit = "Add", edit=False)
-
 # Adding new item to db
-@app.route("/items/", methods=["POST"])
+@app.route("/items/new/", methods=["POST", "GET"])
 @login_required
 def item_create():
-    form = ItemForm(request.form)
+    # New item form
+    if request.method=="GET":
+        return render_template("items/new.html", form = ItemForm(), title = "Add new item", commit = "Add", edit=False)
 
+    # Form validation
+    form = ItemForm(request.form)
     if not form.validate():
         return render_template("items/new.html", form = form)
 
+    # Adding new item to db
     item = Item(form.name.data)
     updateItem(item, form)
-    
     db.session().add(item)
     db.session().commit()
 
@@ -45,7 +44,6 @@ def item_create():
 @login_required
 def item_copy(item_id):
     item = Item.query.get(item_id)
-
     newItem = Item(item.name)
     newItem.user = current_user.id
     newItem.brand = item.brand
@@ -65,6 +63,7 @@ def item_copy(item_id):
 def item_edit(item_id):
     item = Item.query.get(item_id)
     
+    # Edit form
     if request.method == "GET":
         form = ItemForm()
         form.name.data = item.name
@@ -80,9 +79,9 @@ def item_edit(item_id):
             form = form, title = "Update item", 
             commit = "Update", edit=True)
     
-    uform = ItemForm(request.form)    
-    updateItem(item, uform)
-
+    # Update item in db
+    form = ItemForm(request.form)    
+    updateItem(item, form)
     db.session().commit()
 
     return redirect(url_for("items_index"))

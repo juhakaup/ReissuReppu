@@ -17,7 +17,7 @@ def lists_index():
         userLists = GearList.user_lists(current_user.id)
         allLists = GearList.not_user_lists(current_user.id)
     else:
-        allLists = GearList.not_user_lists(-1)
+        allLists = GearList.query.all()
 
     return render_template("gearlists/list.html", 
                             allLists = allLists, userLists = userLists)

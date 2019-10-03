@@ -19,4 +19,5 @@ Toimintoja:
 
 [Linkki sovellukseen](https://reissureppu.herokuapp.com/)
 
-Sovellukseen voi kirjautua tunnuksella: testitunnus salasana:salasana
+Sovellukseen voi kirjautua tunnuksella: 
+testi@testi.fi salasana:salasana
