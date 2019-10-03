@@ -9,7 +9,7 @@ class User(db.Model):
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), 
     onupdate=db.func.current_timestamp())
 
-    name = db.Column(db.String(60))
+    name = db.Column(db.String(100))
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(144), nullable=False)
 

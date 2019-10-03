@@ -1,21 +1,24 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>Add new gearlist</h1>
-<form method="POST" action="{{ url_for('list_create') }}">
-    <div>
-        {{ form.name.label }}
-        {{ form.name }}
-        <ul>
-        {% for error in form.name.errors %}
-            <li>{{ error }}</li>
-        {% endfor %}
-        </ul>
-    </div>
-    <div>
-        {{ form.description.label }}
-        {{ form.description }}
-    </div>
-    <input type="submit" value="Add items to the list"/>
-</form>
+<div style="width: 700px; margin: auto">
+    <h3>Create new gearlist</h3>
+    <form method="POST" action="{{ url_for('list_create') }}">
+        <div>
+            {{ form.name.label }}
+            {{ form.name (class="form-control")}}
+            <ul>
+                {% for error in form.name.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            {{ form.description.label }}
+            {{ form.description (class="form-control")}}
+        </div>
+        <br>
+        <input type="submit" value="Add items to the list" class="btn btn-success" />
+    </form>
+</div>
 {% endblock %}

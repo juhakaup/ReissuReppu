@@ -10,12 +10,9 @@ listItems = db.Table('list_items',
 class GearList(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
-    name = db.Column(db.String(60))
-    description = db.Column(db.String(300))
-
-    # gearlist <-> items reference
-    items = db.relationship('Item', secondary=listItems, 
-            backref=db.backref('items'), lazy = 'dynamic')
+    name = db.Column(db.String(100))
+    description = db.Column(db.String(500))
+    items = db.relationship('Item', secondary=listItems, backref=db.backref('items'), lazy = 'dynamic') # gearlist <-> items reference
 
     def __init__(self, name):
         self.name = name
@@ -27,9 +24,7 @@ class GearList(db.Model):
         "WHERE list_id = :list_id;").params(list_id=list_id)
     
         res = db.engine.execute(stmt)
-
         response = {}
-
         for row in res:
             response = ({"weight":row[0], "volume":row[1]})
         
@@ -46,9 +41,7 @@ class GearList(db.Model):
                     "GROUP BY gear_list.id").params(user_id=user_id)
     
         res = db.engine.execute(stmt)
-
         response = []
-
         for row in res:
             response.append ({"list_id":row[0], "name":row[1], "description":row[2], "username":row[3], "weight":row[4], "volume":row[5]})
         
@@ -65,9 +58,7 @@ class GearList(db.Model):
                     "GROUP BY gear_list.id").params(user_id=user_id)
     
         res = db.engine.execute(stmt)
-
         response = []
-
         for row in res:
             response.append ({"list_id":row[0], "name":row[1], "description":row[2], "username":row[3], "weight":row[4], "volume":row[5]})
         

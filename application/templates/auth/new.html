@@ -4,39 +4,22 @@
 
 <form method="POST" class="main-form" action="{{ url_for('register_user') }}">
     <h3>Register new user</h3>
+    <br>
     <div>
         {{ form.name.label }}
         {{ form.name(class="form-control") }}
     </div>
-    <div>
-        <ul>
-            {% for error in form.name.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+    <ul> {% for error in form.name.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
     <div>
         {{ form.email.label }}
         {{ form.email(class="form-control") }}
     </div>
-    <div>
-        <ul>
-            {% for error in form.email.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+    <ul> {% for error in form.email.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
     <div>
         {{ form.password.label }}
         {{ form.password(class="form-control") }}
     </div>
-    <div>
-        <ul>
-            {% for error in form.password.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+    <ul> {% for error in form.password.errors %} <li class="text-danger"><small>{{ error }}</small></li> {% endfor %} </ul>
     <div>
         <input type="submit" value="Register" class="btn btn-success" />
     </div>

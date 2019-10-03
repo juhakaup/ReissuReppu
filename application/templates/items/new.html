@@ -1,42 +1,47 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>{{ title }}</h1>
+<div style="width: 700px; margin: auto">
+    <h3>{{ title }}</h3>
 
-{% if edit == True %}
-<form method="POST" action="{{ url_for('item_edit', item_id=form.id.data) }}">
-{% else %}
-<form method="POST" action="{{ url_for('item_create') }}">
-{% endif %}
-    <div>
-        {{ form.name.label }}
-        {{ form.name }}
-        <ul>
-        {% for error in form.name.errors %}
-            <li>{{ error }}</li>
-        {% endfor %}
-        </ul>
-    </div>
-    <div>
-        {{ form.brand.label }}
-        {{ form.brand }}
-    </div>
-    <div>
-        {{ form.category.label }}
-        {{ form.category }}
-    </div>
-    <div>
-        {{ form.weight.label }}
-        {{ form.weight }}
-    </div>
-    <div>
-        {{ form.volume.label }}
-        {{ form.volume }}
-    </div>
-    <div>
-        {{ form.description.label }}
-        {{ form.description }}
-    </div>
-    <input type="submit" value="{{ commit }}"/>
-</form>
+    {% if edit == True %}
+    <form method="POST" action="{{ url_for('item_edit', item_id=form.id.data) }}">
+        {% else %}
+        <form method="POST" action="{{ url_for('item_create') }}">
+            {% endif %}
+            <div>
+                {{ form.name.label }}
+                {{ form.name(class="form-control") }}
+                <div>
+                    <ul> {% for error in form.name.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
+                </div>
+                <div>
+                    {{ form.brand.label }}
+                    {{ form.brand(class="form-control") }}
+                </div>
+                    <ul> {% for error in form.brand.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
+                <div>
+                    {{ form.category.label }}
+                    {{ form.category(class="form-control") }}
+                </div>
+                    <ul> {% for error in form.category.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
+                <div>
+                    {{ form.weight.label }}
+                    {{ form.weight(class="form-control") }}
+                </div>
+                    <ul> {% for error in form.weight.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
+                <div>
+                    {{ form.volume.label }}
+                    {{ form.volume (class="form-control")}}
+                </div>
+                    <ul> {% for error in form.volume.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
+                <div>
+                    {{ form.description.label }}
+                    {{ form.description (class="form-control")}}
+                </div>
+                    <ul> {% for error in form.description.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
+                <br>
+                <input type="submit" value="{{ commit }}" class="btn btn-success" />
+        </form>
+</div>
 {% endblock %}
