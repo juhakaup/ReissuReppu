@@ -17,7 +17,8 @@ class Item(namedCreated):
     
     @staticmethod
     def user_items(user_id):
-        stmt = text("SELECT * FROM item WHERE item.user_id = :user_id;").params(user_id = user_id)
+        stmt = text("SELECT item.id, item.user_id, item.name, item.category, item.brand, item.weight, item.volume, item.description "
+                    "FROM item WHERE item.user_id = :user_id;").params(user_id = user_id)
         res = db.engine.execute(stmt)
         response = []
         for row in res:
@@ -27,7 +28,8 @@ class Item(namedCreated):
     
     @staticmethod
     def non_user_items(user_id):
-        stmt = text("SELECT item.id, item.user_id, item.name, item.category, item.brand, item.weight, item.volume, item.description FROM item WHERE NOT item.user_id = :user_id;").params(user_id = user_id)
+        stmt = text("SELECT item.id, item.user_id, item.name, item.category, item.brand, item.weight, item.volume, item.description "
+                    "FROM item WHERE NOT item.user_id = :user_id;").params(user_id = user_id)
         res = db.engine.execute(stmt)
         response = []
         for row in res:

@@ -49,6 +49,9 @@ def modify_list(list_id):
         return redirect(url_for("lists_index"))
 
     availableItems = gearlist.available_items(current_user.id)
+    for item in availableItems:
+        print("\n")
+        print(item["name"])
     return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, availableItems = availableItems)
 
 # Adding items to a gearlist

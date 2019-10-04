@@ -28,7 +28,7 @@ class GearList(namedCreated):
                     "LEFT JOIN list_items ON gearlist.id = list_items.list_id "
                     "LEFT JOIN item ON list_items.item_id = item.id "
                     "WHERE NOT account.id = :user_id "
-                    "GROUP BY gearlist.id").params(user_id=user_id)
+                    "GROUP BY gearlist.id, account.name").params(user_id=user_id)
     
         res = db.engine.execute(stmt)
         response = []
@@ -44,7 +44,7 @@ class GearList(namedCreated):
                     "LEFT JOIN list_items ON gearlist.id = list_items.list_id "
                     "LEFT JOIN item ON list_items.item_id = item.id "
                     "WHERE account.id = :user_id "
-                    "GROUP BY gearlist.id").params(user_id=user_id)
+                    "GROUP BY gearlist.id, account.name").params(user_id=user_id)
     
         res = db.engine.execute(stmt)
         response = []
@@ -54,10 +54,8 @@ class GearList(namedCreated):
 
     def available_items(self, user_id):
         stmt = text("SELECT item.id, item.user_id, item.name, item.category, item.brand, item.weight, item.volume, item.description FROM item "
-                    "LEFT JOIN list_items ON item.id = list_items.item_id "
                     "WHERE item.user_id = :user_id "
-                    "AND list_items.list_id IS null "
-                    "OR NOT list_items.list_id = :gearlist_id;").params(user_id = user_id, gearlist_id = self.id)
+                    "AND item.id NOT IN (SELECT list_items.item_id FROM list_items WHERE list_items.list_id IS :gearlist_id);").params(user_id = user_id, gearlist_id = self.id)
         res = db.engine.execute(stmt)
         response = []
         for row in res:
