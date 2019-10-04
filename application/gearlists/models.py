@@ -55,7 +55,7 @@ class GearList(namedCreated):
     def available_items(self, user_id):
         stmt = text("SELECT item.id, item.user_id, item.name, item.category, item.brand, item.weight, item.volume, item.description FROM item "
                     "WHERE item.user_id = :user_id "
-                    "AND item.id NOT IN (SELECT list_items.item_id FROM list_items WHERE list_items.list_id IS :gearlist_id);").params(user_id = user_id, gearlist_id = self.id)
+                    "AND item.id NOT IN (SELECT list_items.item_id FROM list_items WHERE list_items.list_id = :gearlist_id);").params(user_id = user_id, gearlist_id = self.id)
         res = db.engine.execute(stmt)
         response = []
         for row in res:
