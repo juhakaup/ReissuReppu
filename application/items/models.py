@@ -34,8 +34,8 @@ class Item(db.Model):
         
         return response
 
-    @staticmethod
-    def gearlist_available_items(gearlist_id, user_id):
+    """@staticmethod
+    def available_items(gearlist_id, user_id):
         stmt = text("SELECT * FROM item "
                     "LEFT JOIN list_items ON item.id = list_items.item_id "
                     "WHERE item.user = :user_id "
@@ -46,4 +46,4 @@ class Item(db.Model):
         for row in res:
             response.append ({"id":row[0], "user":row[1], "name":row[2], "category":row[3], "brand":row[4], "weight":row[5], "volume":row[6], "description":row[7]})
         
-        return response
+        return response """

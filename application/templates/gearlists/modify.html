@@ -7,7 +7,7 @@
 
     <p>Gearlist: {{ gearlist.name }}</p>
     <p>Description: {{ gearlist.description }}</p>
-    <p>Total weight: {{ params.weight }}g. Total volume: {{ params.volume }}l.</p>
+    <p>Total weight: {{ gearlist.weight() }}g. Total volume: {{ gearlist.volume() }}l.</p>
     <br>
     <p>Gearlist items:</p>
     <table class="table table-sm table-striped">

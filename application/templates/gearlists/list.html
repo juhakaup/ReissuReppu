@@ -45,12 +45,12 @@
         <tr>
             <td>{{ list.name }}</td>
             <td><span class="d-inline-block text-truncate" style="max-width: 250px;">{{ list.description }}</span></td>
-            <td>{{ list.username }}</td>
+            <td>{{ list.user }}</td>
             <td>{{ list.weight }}</td>
             <td>{{ list.volume }}</td>
             <td>
-                <form method="GET" action="{{ url_for('modify_list',list_id=list.list_id) }}">
-                    <input type="submit" value="View" class="btn btn-sm btn-outline-success" disabled />
+                <form method="GET" action="{{ url_for('view_list',list_id=list.list_id) }}">
+                    <input type="submit" value="View" class="btn btn-sm btn-outline-success" />
                 </form>
             </td>
         </tr>

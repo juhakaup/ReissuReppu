@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div style="width: 700px; margin: auto">
+    <h3>Gearlist</h3>
+
+    <p>{{ gearlist.name }}</p>
+    <p>Total weight: {{ gearlist.weight() }}g. Total volume: {{ gearlist.volume() }}l.</p>
+    <p>Description: {{ gearlist.description }}</p>
+    <br>
+    <p>Gearlist items:</p>
+    <table class="table table-sm table-striped">
+        <tr>
+            <th>Item</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Weight</th>
+            <th>Volume</th>
+            <th>Description</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.brand }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.weight }}</td>
+            <td>{{ item.volume }}</td>
+            <td>{{ item.description }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
