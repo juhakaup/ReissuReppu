@@ -3,7 +3,7 @@ from wtforms import StringField, IntegerField, FloatField, SelectField, validato
 
 class ItemForm(FlaskForm):
     name = StringField("Name", [validators.Length(min=2, max=100), validators.Regexp(r'^[a-zA-Z0-9 öäå!@#$%^&*(),.?":{}|<>]*$')])
-    user = IntegerField("User")
+    user_id = IntegerField("User")
     brand = StringField("Brand", [validators.Length(min=2, max=100), validators.Regexp(r'^[a-zA-Z0-9 öäå!@#$%^&*(),.?":{}|<>]*$')])
     category = SelectField("Category", 
                     choices=[('other', 'Other'), ('shelter', 'Shelter'), ('cooking', 'Cooking'), ('clothing', 'Clothing'), 

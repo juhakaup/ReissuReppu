@@ -34,7 +34,7 @@ def list_create():
         return render_template("gearlists/new.html", form = ListsForm())
     # adding new gearlist to db
     form = ListsForm(request.form)
-    gearlist = GearList(name=form.name.data, user=current_user.id, description=form.description.data)
+    gearlist = GearList(name=form.name.data, user_id=current_user.id, description=form.description.data)
     db.session().add(gearlist)
     db.session().commit()
 
@@ -45,9 +45,9 @@ def list_create():
 @login_required
 def modify_list(list_id):
     gearlist = GearList.query.get(list_id)
-    if gearlist.user != current_user.id:
+    if gearlist.user_id != current_user.id:
         return redirect(url_for("lists_index"))
-        
+
     availableItems = gearlist.available_items(current_user.id)
     return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, availableItems = availableItems)
 

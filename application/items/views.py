@@ -45,7 +45,7 @@ def item_create():
 def item_copy(item_id):
     item = Item.query.get(item_id)
     newItem = Item(item.name)
-    newItem.user = current_user.id
+    newItem.user_id = current_user.id
     newItem.brand = item.brand
     newItem.category = item.category
     newItem.weight = item.weight
@@ -72,7 +72,7 @@ def item_edit(item_id):
         form.weight.data = item.weight
         form.volume.data = item.volume
         form.description.data = item.description
-        form.user.data = item.user
+        form.user_id.data = item.user_id
         form.id.data = item_id
         
         return render_template("items/new.html", 
@@ -94,7 +94,7 @@ def updateItem(item, form):
     item.weight = form.weight.data
     item.volume = form.volume.data
     item.description = form.description.data
-    item.user = current_user.id
+    item.user_id = current_user.id
 
 # Delete item from db
 @app.route("/items/rm/<item_id>", methods=["POST"])
