@@ -21,6 +21,11 @@
     </div>
     <ul> {% for error in form.password.errors %} <li class="text-danger"><small>{{ error }}</small></li> {% endfor %} </ul>
     <div>
+            {{ form.confirm.label }}
+            {{ form.confirm(class="form-control") }}
+        </div>
+        <ul> {% for error in form.confirm.errors %} <li class="text-danger"><small>{{ error }}</small></li> {% endfor %} </ul>
+    <div>
         <input type="submit" value="Register" class="btn btn-success" />
     </div>
     <small class="text-danger">{{ error }}</small>
