@@ -1,9 +1,11 @@
-# Tietokanta
+# Tietokantakaavio
 
 ##Tietokantakaavio
 ![Tietokantakaavio](https://github.com/juhakaup/ReissuReppu/blob/master/documents/tsoha.png  "Tietokantakaavio")
 
-##Create table lauseet
+### Create table lauseet
+
+
 	CREATE TABLE account (
     	id INTEGER NOT NULL, 
 		date_created DATETIME, 
