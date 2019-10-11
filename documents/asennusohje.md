@@ -6,9 +6,10 @@ Nämä asennusohjeet käsittelevät asentamista linux-ympäristössä.
 
 #### Asentaminen paikallisesti
 
-Ohjelman paikallista asentamista ja ajamista varten käyttäjällä tulee olla asennettuna python3 ja sqlite, sekä mahdollisesti git.
+Ohjelman paikallista asentamista ja ajamista varten käyttäjällä tulee olla asennettuna python3 ja sqlite3, sekä mahdollisesti git.
 
 **Lataaminen omalle koneelle**
+
 Lataa sovellus zip-tiedostona githubista 'Clone or download' -linkin takaa. Pura tiedosto haluamaasi kansioon.
 Vaihtoehtoisesti voit kloonata projektin omalle koneellesi komennolla:
 
@@ -16,6 +17,7 @@ Vaihtoehtoisesti voit kloonata projektin omalle koneellesi komennolla:
 Tällöin koneellasi tulee olla asennettuna myös git.	
 
 **Asennus**
+
 Navigoi komentorivillä kansioon johon purit zip-paketin tai kloonasit projektin.
 Mene kansioon ReissuReppu.
 Luo virtuaaliympäristö ja käynnistä se komennoilla:
@@ -33,11 +35,20 @@ Jos asennuksessa ilmenee ongelmia voit yrittää päivittää itse pip -sovelluk
 	(venv) $ pip install --upgrade pip
 
 **Ohjelman ajaminen**
+
 Jos kaikki paketit asentuivat onnistuneesti, sovellus voidaan nyt käynnistää komennolla:
 
 	(venv) $ python run.py
 Sovelluksen pitäisi olla nyt käynnissä ja komentorivillä teksti:
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
+Ennen sovellukseen käyttämistä, pitää sen tietokantaan vielä lisätä tiedot käyttäjärooleista.
+Avaa tietokanta sqlite3:lla ja lisää käyttäjäroolit.
+
+	$ sqlite3 application/gearlists.db 
+	sqlite> INSERT INTO role (role) VALUES ('ADMIN'), ('USER');
+	sqlite> .exit
+
 
 Sovellusta voi nyt käyttää nettiselaimella osoitteessa: http://127.0.0.1:5000/
 
