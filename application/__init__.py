@@ -72,13 +72,12 @@ from application.gearlists import views
 
 from application.auth.models import User
 
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
 # create db if needed
 try:
-    db.create_all()
+    db.create_all()    
 except:
     pass

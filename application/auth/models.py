@@ -41,3 +41,9 @@ class User(namedCreated):
     def is_authenticated(self):
         return True
 
+    def has_role(self, role):
+        for user_role in self.roles:
+            if user_role.role == role:
+                return True
+        return False
+

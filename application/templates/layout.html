@@ -21,7 +21,9 @@
         <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ current_user.name }}</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <a class="dropdown-item" href="{{ url_for('auth_logout') }}">Logout</a>
+                {% if current_user.has_role("ADMIN") %}
                 <a class="dropdown-item" href="{{ url_for('list_users') }}">Users</a>
+                {% endif %}
             </div>
         {% else %}
         <a class="btn btn-outline-primary" href="{{ url_for('auth_login') }}">Login/Register</a>
