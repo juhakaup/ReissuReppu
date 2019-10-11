@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
 
 from application import app, db, login_required, bcrypt
-from application.auth.models import User
+from application.auth.models import User, Role
 from application.auth.forms import LoginForm, RegisterForm
 
 # Login
@@ -20,8 +20,7 @@ def auth_login():
     # Check if user in db and password match
     user = User.query.filter_by(email=form.email.data).first()
     if not user or not bcrypt.check_password_hash(user.password, form.password.data):
-        return render_template("auth/loginform.html", form = form, 
-                error = "No such email or password")
+        return render_template("auth/loginform.html", form = form,  error = "No such email or password")
     
     login_user(user)
     return redirect(url_for("lists_index"))
@@ -38,16 +37,16 @@ def register_user():
     if not form.validate():
         return render_template("auth/new.html", form = form, error="")
 
-    user = User(form.email.data, form.password.data)
-    user.name = form.name.data
-
     # Check for existing user with the same email
+    user = User(form.name.data, form.email.data, form.password.data)
     if User.query.filter_by(email=user.email).first():
         return render_template("auth/new.html", form = form, error="An account with this email already exists")
     
     # Adding new user to db
     db.session().add(user)
+    user.roles.append(Role.query.filter_by(role="USER").first())
     db.session().commit()
+
     return redirect(url_for("auth_login"))
 
 # Logout user
@@ -61,8 +60,10 @@ def auth_logout():
 @login_required(role="ADMIN")
 def list_users():
     users = User.query.all()
+    print("\n")
     for user in users:
-        print(user.name)
+        print("user id:" + str(user.id) + " name:" + user.name + " email:" + user.email)
+    print("\n")
 
     return redirect(url_for("lists_index"))
 
