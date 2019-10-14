@@ -13,6 +13,7 @@
             <th>Weight</th>
             <th>Volume</th>
             <th></th>
+            <th></th>
         </tr>
         {% for list in userLists %}
         <tr>
@@ -25,6 +26,11 @@
                     <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
                 </form>
             </td>
+            <td>
+                    <form method="POST" action="{{ url_for('delete_list',list_id=list.list_id) }}">
+                        <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger" />
+                    </form>
+                </td>
         </tr>
         {% endfor %}
     </table>

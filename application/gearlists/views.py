@@ -54,6 +54,19 @@ def modify_list(list_id):
         print(item["name"])
     return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, availableItems = availableItems)
 
+# Remove gearlist
+@app.route("/lists/rm/<list_id>", methods=["POST"])
+@login_required 
+def delete_list(list_id):   
+    gearlist = GearList.query.get(list_id)
+    if gearlist.user_id != current_user.id:
+        return redirect(url_for("lists_index"))
+    db.session.delete(gearlist)
+    db.session.commit()
+    
+    return redirect(url_for("lists_index"))
+
+
 # Adding items to a gearlist
 @app.route("/lists/<list_id>/<item_id>", methods=["POST"])
 @login_required
