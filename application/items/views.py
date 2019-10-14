@@ -10,7 +10,7 @@ import copy
 @app.route("/items", methods=["GET"])
 def items_index():
     userItems = None
-    otherItems = Item.query.all()
+    otherItems = Item.non_user_items(-1) #Item.query.all()
 
     if current_user.is_authenticated:
         userItems = Item.user_items(current_user.id)
