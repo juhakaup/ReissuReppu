@@ -49,6 +49,17 @@ def register_user():
 
     return redirect(url_for("auth_login"))
 
+# Delete user
+@app.route("/auth/rm/<user_id>", methods=["POST"])
+@login_required(role="ADMIN")
+def remove_user(user_id):
+
+    user = User.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect(url_for("list_users"))
+
 # Logout user
 @app.route("/auth/logout")
 def auth_logout():
@@ -60,11 +71,6 @@ def auth_logout():
 @login_required(role="ADMIN")
 def list_users():
     users = User.query.all()
-    print("\n")
-    for user in users:
-        print("user id:" + str(user.id) + " name:" + user.name + " email:" + user.email)
-    print("\n")
-
-    return redirect(url_for("lists_index"))
+    return render_template("/auth/list.html", users = users)
 
 
