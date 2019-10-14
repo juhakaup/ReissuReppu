@@ -11,13 +11,10 @@ from flask_login import login_required
 # Listing all gearlists
 @app.route("/lists", methods=["GET"])
 def lists_index():  
+    userLists = None
     if current_user.is_authenticated:
         userLists = GearList.user_lists(current_user.id)
-        allLists = GearList.not_user_lists(current_user.id)
-    else:
-        allLists = GearList.not_user_lists(-1)
-        userLists = None
-    return render_template("gearlists/list.html", allLists = allLists, userLists = userLists)
+    return render_template("gearlists/list.html", allLists = GearList.all_lists(), userLists = userLists)
 
 # Viewing a gearlist
 @app.route("/lists/<list_id>", methods=["GET"])

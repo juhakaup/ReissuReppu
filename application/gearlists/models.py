@@ -21,14 +21,13 @@ class GearList(namedCreated):
         self.description = description
     
     @staticmethod
-    def not_user_lists(user_id):
+    def all_lists():
         stmt = text("SELECT gearlist.id, gearlist.name, gearlist.description, account.name, SUM(item.weight), SUM(item.volume) "
                     "FROM gearlist "
                     "LEFT JOIN account ON gearlist.user_id = account.id "
                     "LEFT JOIN list_items ON gearlist.id = list_items.list_id "
                     "LEFT JOIN item ON list_items.item_id = item.id "
-                    "WHERE NOT account.id = :user_id "
-                    "GROUP BY gearlist.id, account.name").params(user_id=user_id)
+                    "GROUP BY gearlist.id, account.name")
     
         res = db.engine.execute(stmt)
         response = []

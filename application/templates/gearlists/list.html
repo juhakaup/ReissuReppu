@@ -4,57 +4,47 @@
 
 <div style="width: 700px; margin: auto">
 
-    {% if not userLists == None %}
-    <p>User gearlists</p>
-    <table class="table table-sm table-striped">
-        <tr>
-            <th>Name</th>
-            <th>Desciption</th>
-            <th>Weight</th>
-            <th>Volume</th>
-            <th></th>
-        </tr>
-        {% for list in userLists %}
-        <tr>
-            <td>{{ list.name }}</td>
-            <td>{{ list.description }}</td>
-            <td>{{ list.weight }}</td>
-            <td>{{ list.volume }}</td>
-            <td>
-                <form method="GET" action="{{ url_for('modify_list',list_id=list.list_id) }}">
-                    <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-
-    <br>
-    <p>Gearlists</p>
-    <table class="table table-sm table-striped">
+        {% if not userLists == None %}
+        <h5>User gearlists</h5>
+        <table class="table table-sm table-striped table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Desciption</th>
+                <th>Weight</th>
+                <th>Volume</th>
+            </tr>
+            {% for list in userLists %}
+            <tr>
+                <td> <a href="{{ url_for('view_list',list_id=list.list_id) }}"> {{ list.name }} </a> </td>
+                <td>{{ list.description }}</td>
+                <td>{{ list.weight }}</td>
+                <td>{{ list.volume }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <hr>
+        {% endif %}
+        
+        <h5>All gearlists</h5>
+    <table class="table table-sm table-striped table-bordered">
         <tr>
             <th>Name</th>
             <th>Desciption</th>
             <th>Created by</th>
             <th>Weight</th>
             <th>Volume</th>
-            <th></th>
         </tr>
         {% for list in allLists %}
         <tr>
-            <td>{{ list.name }}</td>
+            <td> <a href="{{ url_for('view_list',list_id=list.list_id) }}"> {{ list.name }} </a> </td>
             <td><span class="d-inline-block text-truncate" style="max-width: 250px;">{{ list.description }}</span></td>
-            <td>{{ list.user }}</td>
+            <td>{{ list.username }}</td>
             <td>{{ list.weight }}</td>
             <td>{{ list.volume }}</td>
-            <td>
-                <form method="GET" action="{{ url_for('view_list',list_id=list.list_id) }}">
-                    <input type="submit" value="View" class="btn btn-sm btn-outline-success" />
-                </form>
-            </td>
         </tr>
         {% endfor %}
+
     </table>
 </div>
 {% endblock %}
