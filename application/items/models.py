@@ -14,6 +14,12 @@ class Item(namedCreated):
 
     def __init__(self, name):
         self.name = name
+
+    def __eq__(self, other):
+        return self.id == other.id
+
+    def __ne__(self, other):
+        return self.id != other.id
     
     @staticmethod
     def user_items(user_id):

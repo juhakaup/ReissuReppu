@@ -5,9 +5,41 @@
 <div style="width: 700px; margin: auto">
     <h1>Edit gearlist</h1>
 
-    <p>Gearlist: {{ gearlist.name }}</p>
-    <p>Description: {{ gearlist.description }}</p>
-    <p>Total weight: {{ gearlist.weight() }}g. Total volume: {{ gearlist.volume() }}l.</p>
+    <div style="width: 700px; margin: auto">
+        <form method="POST" action="{{ url_for('modify_list',list_id=gearlist.id) }}">
+            <div>
+                {{ form.name.label }}
+                {{ form.name (class="form-control")}}
+                <ul>
+                    {% for error in form.name.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div>
+                {{ form.description.label }}
+                {{ form.description (class="form-control")}}
+            </div>
+            <p></p>
+            <input type="submit" value="Update name and description" class="btn btn-outline-success" />
+        </form>
+    </div>
+    <br>
+
+    <table class="table table-sm table-striped">
+        <tr>
+            <th>Gearlist weight</th>
+            <th>Gearlist volume</th>
+            <th>Number of items</th>
+        </tr>
+        <tr>
+            <td>{{ gearlist.weight() }}g.</td>
+            <td>{{ gearlist.volume() }}l.</td>
+            <td></td>
+        </tr>
+    </table>
+    <hr>
+
     <br>
     <p>Gearlist items:</p>
     <table class="table table-sm table-striped">
@@ -18,6 +50,7 @@
             <th>Weight</th>
             <th>Volume</th>
             <th>Description</th>
+            <th>Action</th>
         </tr>
         {% for item in items %}
         <tr>
@@ -36,7 +69,7 @@
         {% endfor %}
     </table>
     <br>
-    <p>User items:</p>
+    <p>Available items:</p>
     <table class="table table-sm table-striped">
         <tr>
             <th>Item</th>
@@ -45,6 +78,7 @@
             <th>Weight</th>
             <th>Volume</th>
             <th>Description</th>
+            <th>Action</th>
         </tr>
         {% for item in availableItems %}
         <tr>
