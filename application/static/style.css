@@ -3,6 +3,22 @@
     margin: auto;
 }
 
-#h3 {
-    color: blue;
+.main-table {
+    width: 700px; 
+    margin: auto;
+}
+
+.table-scrollable {
+    position: relative;
+    max-height: 350px;
+    overflow: auto;
+}
+
+.table-scroll-y {
+    display: block;
+}
+
+.tableFixHead thead th { 
+    position: 
+    sticky; top: 0; 
 }

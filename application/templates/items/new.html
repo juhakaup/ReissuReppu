@@ -2,7 +2,7 @@
 
 {% block body %}
 <div style="width: 700px; margin: auto">
-    <h3>{{ title }}</h3>
+    <h5>{{ title }}</h5>
 
     {% if edit == True %}
     <form method="POST" action="{{ url_for('item_edit', item_id=form.id.data) }}">

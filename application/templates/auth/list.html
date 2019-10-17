@@ -5,14 +5,14 @@
 <div style="width: 700px; margin: auto">
 
     
-    <p>Users</p>
+    <H4>Users</H4>
     <table class="table table-sm table-striped ">
-        <tr>
+        <thead>
             <th>Id</th>
             <th>Name</th>
             <th>email</th>
             <th class="text-center">Action</th>
-        </tr>
+        </thead>
         {% for user in users %}
         <tr>
             <td>{{ user.id }}</td>
@@ -20,7 +20,7 @@
             <td>{{ user.email }}</td>
             <td align="center">
                 <form method="POST" action="{{ url_for('remove_user',user_id=user.id) }}">
-                    <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger" />
+                    <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger" {% if current_user.id == user.id %} disabled {% endif %}/>
                 </form>
             </td>
         </tr>

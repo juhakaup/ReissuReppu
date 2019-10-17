@@ -80,3 +80,9 @@ class GearList(namedCreated):
         res = db.engine.execute(stmt)
         response = res.first()
         return response[0]
+    
+    def noItems(self):
+        i=0
+        for item in self.items:
+            i=i+1
+        return i

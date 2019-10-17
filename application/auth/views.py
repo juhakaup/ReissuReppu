@@ -55,6 +55,8 @@ def register_user():
 def remove_user(user_id):
 
     user = User.query.get(user_id)
+    for item in user.items:
+        db.session.delete(item)
     db.session.delete(user)
     db.session.commit()
 

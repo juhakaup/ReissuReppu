@@ -3,12 +3,20 @@
 {% block body %}
 
 <div style="width: 700px; margin: auto">
-    <h3>Gearlist</h3>
-
-    <p>{{ gearlist.name }}</p>
-    <p>Total weight: {{ gearlist.weight() }}g. Total volume: {{ gearlist.volume() }}l.</p>
-    <p>Description: {{ gearlist.description }}</p>
-    <br>
+    <h4>{{ gearlist.name }}</h4>
+    <table class="table table-sm table-striped">
+        <tr>
+            <th>Gearlist weight</th>
+            <th>Gearlist volume</th>
+            <th>Number of items</th>
+        </tr>
+        <tr>
+            <td>{{ gearlist.weight() }}g.</td>
+            <td>{{ gearlist.volume() }}l.</td>
+            <td>{{ gearlist.noItems() }}</td>
+        </tr>
+    </table>
+    <hr>
     <p>Gearlist items:</p>
     <table class="table table-sm table-striped">
         <tr>
@@ -30,5 +38,14 @@
         </tr>
         {% endfor %}
     </table>
+    <hr>
+    
+    <div class="card">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted">Description</h6>
+          <p class="card-text">{{ gearlist.description }}</p>
+          <footer class="blockquote-footer"> {{ gearlist.username() }} </footer>
+        </div>
+      </div>
 </div>
 {% endblock %}

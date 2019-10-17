@@ -21,7 +21,7 @@ class User(namedCreated):
     password = db.Column(db.String(60), nullable=False)
 
     items = db.relationship("Item", backref='item', lazy=True)
-    gearlists = db.relationship("GearList", backref='gearlist', lazy=True)
+    gearlists = db.relationship("GearList", backref='gearlist', lazy=True, cascade="all,delete")
     roles = db.relationship("Role", secondary=userRoles, backref=db.backref('roles'), lazy='dynamic')
 
     def __init__(self, name, email, password):

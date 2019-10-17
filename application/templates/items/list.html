@@ -2,78 +2,83 @@
 
 {% block body %}
 
-<div style="width: 700px; margin: auto">
+<div class="main-table">
 
     {% if not userItems == None %}
-    <p>User items</p>
-    <table class="table table-sm table-striped">
-        <thead>
-            <th>Item</th>
-            <th>Brand</th>
-            <th>Category</th>
-            <th>Weight</th>
-            <th>Volume</th>
-            <th>Description</th>
-            <th></th>
-            <th></th>
-        </thead>
-        {% for item in userItems %}
-        <tbody>
-            <td>{{ item.name }}</td>
-            <td>{{ item.brand }}</td>
-            <td>{{ item.category }}</td>
-            <td>{{ item.weight }}</td>
-            <td>{{ item.volume }}</td>
-            <td>{{ item.description }}</td>
-            <td>
-                <form method="GET" action="{{ url_for('item_edit', item_id=item.id) }}">
-                    <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
-                </form>
-            </td>
-            <td>
-                <form method="POST" action="{{ url_for('item_rm', item_id=item.id) }}">
-                    <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger" />
-                </form>
-            </td>
-        </thead>
-        {% endfor %}
-    </table>
-    {% endif %}
+    <h5>User items</h5>
+    <div class="table-scroll-y table-scrollable tableFixHead">
+        <table class="table table-sm table-striped">
+            <thead class="thead-light">
+                <th>Item</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Weight</th>
+                <th>Volume</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </thead>
+            {% for item in userItems %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.brand }}</td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.weight }}</td>
+                <td>{{ item.volume }}</td>
+                <td>{{ item.description }}</td>
+                <td>
+                    <form method="GET" action="{{ url_for('item_edit', item_id=item.id) }}">
+                        <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('item_rm', item_id=item.id) }}">
+                        <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger" />
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <hr>
     <br>
-    
-    <p>All items</p>
-    <table class="table table-sm table-striped">
-        <tr>
-            <th>Item</th>
-            <th>Brand</th>
-            <th>Category</th>
-            <th>Weight</th>
-            <th>Volume</th>
-            <th>Description</th>
-            <th></th>
-        </tr>
-        {% for item in items %}
-        <tr>
-            <td>{{ item.name }}</td>
-            <td>{{ item.brand }}</td>
-            <td>{{ item.category }}</td>
-            <td>{{ item.weight }}</td>
-            <td>{{ item.volume }}</td>
-            <td>{{ item.description }}</td>
-            <td>
-                {% if current_user.is_authenticated %}
-                <form method="POST" action="{{ url_for('item_copy', item_id=item.id) }}">
-                    <input type="submit" value="Add to my items" class="btn btn-sm btn-outline-success" />
-                </form>
-                {% endif %}
-            </td>
-            
-        </tr>
-        {% endfor %}
-    </table>
+    {% endif %}
+
+    <h5>All items</h5>
+    <div class="table-scroll-y table-scrollable tableFixHead">
+        <table class="table table-sm table-striped">
+            <thead class="thead-light">
+                <th>Item</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Weight</th>
+                <th>Volume</th>
+                <th>Description</th>
+                <th></th>
+            </thead>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.brand }}</td>
+                <td>{{ item.category }}</td>
+                <td>{{ item.weight }}</td>
+                <td>{{ item.volume }}</td>
+                <td>{{ item.description }}</td>
+                <td>
+                    {% if current_user.is_authenticated %}
+                    <form method="POST" action="{{ url_for('item_copy', item_id=item.id) }}">
+                        <input type="submit" value="Add to my items" class="btn btn-sm btn-outline-success" />
+                    </form>
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
     <br>
     {% if current_user.is_authenticated %}
-    <a href="{{ url_for('item_create') }}" class="btn btn-sm btn-success" >Add new item</a>
+    <a href="{{ url_for('item_create') }}" class="btn btn-sm btn-success">Add new item</a>
     {% endif %}
 </div>
 {% endblock %}
