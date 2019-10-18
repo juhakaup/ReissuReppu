@@ -2,9 +2,9 @@
 
 {% block body %}
 <div class="main-form">
-    <h5>Add new item</h5>
+    <h5>Update item</h5>
 
-    <form method="POST" action="{{ url_for('item_create') }}">
+    <form method="POST" action="{{ url_for('item_update', item_id=form.id.data) }}">
         <div>
         {{ form.name.label }}
         {{ form.name(class="form-control") }}
@@ -37,7 +37,7 @@
         </div>
             <ul> {% for error in form.description.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
         <br>
-        <input type="submit" value="Add" class="btn btn-success" />
+        <input type="submit" value="Update" class="btn btn-success" />
     </form>
 </div>
 {% endblock %}

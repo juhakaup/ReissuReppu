@@ -28,7 +28,7 @@ class Item(namedCreated):
         res = db.engine.execute(stmt)
         response = []
         for row in res:
-            response.append ({"id":row[0], "user_id":row[1], "name":row[2], "catogory":row[3], "brand":row[4], "weight":row[5], "volume":row[6], "description":row[7]})
+            response.append ({"id":row[0], "user_id":row[1], "name":row[2], "category":row[3], "brand":row[4], "weight":row[5], "volume":row[6], "description":row[7]})
         
         return response
     

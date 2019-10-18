@@ -3,6 +3,11 @@
     margin: auto;
 }
 
+.wide-form {
+    width: 700px;
+    margin: auto;
+}
+
 .main-table {
     width: 700px; 
     margin: auto;

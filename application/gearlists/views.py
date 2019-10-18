@@ -37,7 +37,7 @@ def list_create():
     db.session().commit()
 
     return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, 
-                            availableItems = gearlist.available_items(current_user.id), form = form)
+                            availableItems = gearlist.available_items(gearlist.user_id), form = form)
 
 # Modify existing gearlist form
 @app.route("/lists/modify/<list_id>", methods=["POST"])
@@ -53,7 +53,7 @@ def modify_list(list_id):
     form.description.data = gearlist.description
 
     return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, 
-                            availableItems = gearlist.available_items(current_user.id), form = form)
+                            availableItems = gearlist.available_items(gearlist.user_id), form = form)
 
 # Update existing gearlist
 @app.route("/lists/<list_id>", methods=["POST"])
@@ -69,9 +69,8 @@ def update_list(list_id):
     gearlist.description = form.description.data
     db.session.commit()
     
-    availableItems = gearlist.available_items(current_user.id)
     return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, 
-                            availableItems = availableItems, form = form)
+                            availableItems = gearlist.available_items(gearlist.user_id), form = form)
 
 # Remove gearlist
 @app.route("/lists/rm/<list_id>", methods=["POST"])
@@ -103,10 +102,9 @@ def additem_list(list_id, item_id):
     form.name.data = gearlist.name
     form.description.data = gearlist.description
 
-    availableItems = gearlist.available_items(current_user.id)
     return render_template("gearlists/modify.html", 
                             gearlist = gearlist, items = gearlist.items, 
-                            availableItems = availableItems, form=form)
+                            availableItems = gearlist.available_items(gearlist.user_id), form=form)
 
 # Remove item from a gearlist
 @app.route("/lists/rm/<list_id>/<item_id>", methods=["POST"])
@@ -122,7 +120,6 @@ def rmItem_list(list_id, item_id):
     form.name.data = gearlist.name
     form.description.data = gearlist.description
 
-    availableItems = gearlist.available_items(current_user.id)
     return render_template("gearlists/modify.html", gearlist = gearlist, 
                             items = gearlist.items, 
-                            availableItems = availableItems, form=form)
+                            availableItems = gearlist.available_items(gearlist.user_id), form=form)

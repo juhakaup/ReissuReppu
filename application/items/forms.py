@@ -9,8 +9,8 @@ class ItemForm(FlaskForm):
                     choices=[('other', 'Other'), ('shelter', 'Shelter'), ('cooking', 'Cooking'), ('clothing', 'Clothing'), 
                             ('hygene', 'Hygene'), ('elec', 'Electronics'), ('sleeping', 'Sleeping'), 
                             ('nav', 'Navigation'), ('survival', 'Survival'), ('luxury', 'Luxury')])
-    weight = IntegerField("Weight in grams", [validators.NumberRange(min=0, max=100000)])
-    volume = FloatField("Volume in liters", [validators.NumberRange(min=0, max=99)])
+    weight = IntegerField("Weight in grams", [validators.NumberRange(min=0, max=100000)], default=0)
+    volume = FloatField("Volume in liters", [validators.NumberRange(min=0, max=99)], default=0)
     description = StringField("Description", [validators.Length(min=2, max=500)])
     id = IntegerField("id")
 
