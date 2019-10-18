@@ -7,15 +7,16 @@
         <div>
             {{ form.name.label }}
             {{ form.name (class="form-control")}}
-            <ul>
-                {% for error in form.name.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
+            <div>
+                <ul> {% for error in form.name.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
+            </div>
         </div>
         <div>
             {{ form.description.label }}
             {{ form.description (class="form-control")}}
+            <div>
+                <ul> {% for error in form.description.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
+            </div>
         </div>
         <br>
         <input type="submit" value="Add items to the list" class="btn btn-success" />

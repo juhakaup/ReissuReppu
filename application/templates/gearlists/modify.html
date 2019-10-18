@@ -12,8 +12,8 @@
             <th>Number of items</th>
         </tr>
         <tr>
-            <td>{{ gearlist.weight() }}g.</td>
-            <td>{{ gearlist.volume() }}l.</td>
+            <td>{{ gearlist.weight() }}g</td>
+            <td>{{ gearlist.volume() }}l</td>
             <td>{{ gearlist.noItems() }}</td>
         </tr>
     </table>
@@ -34,8 +34,8 @@
             <td>{{ item.name }}</td>
             <td>{{ item.brand }}</td>
             <td>{{ item.category }}</td>
-            <td>{{ item.weight }}</td>
-            <td>{{ item.volume }}</td>
+            <td>{{ item.weight }}g</td>
+            <td>{{ item.volume }}l</td>
             <td>{{ item.description }}</td>
             <td>
                 <form method="POST" action="{{ url_for('rmItem_list',list_id=gearlist.id, item_id=item.id) }}">
@@ -62,8 +62,8 @@
             <td>{{ item.name }}</td>
             <td>{{ item.brand }}</td>
             <td>{{ item.category }}</td>
-            <td>{{ item.weight }}</td>
-            <td>{{ item.volume }}</td>
+            <td>{{ item.weight }}g</td>
+            <td>{{ item.volume }}l</td>
             <td>{{ item.description }}</td>
             <td>
                 <form method="POST" action="{{ url_for('additem_list',list_id=gearlist.id, item_id=item.id) }}">
@@ -79,15 +79,16 @@
         <div>
             {{ form.name.label }}
             {{ form.name (class="form-control")}}
-            <ul>
-                {% for error in form.name.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
+            <div>
+                <ul> {% for error in form.name.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
+            </div>
         </div>
         <div>
             {{ form.description.label }}
             {{ form.description (class="form-control")}}
+        </div>
+        <div>
+            <ul> {% for error in form.description.errors %} <li class="text-danger"> <small>{{ error }}</small></li> {% endfor %} </ul>
         </div>
         <p></p>
         <input type="submit" value="Update name and description" class="btn btn-outline-success" />

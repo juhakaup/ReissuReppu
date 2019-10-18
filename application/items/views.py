@@ -24,12 +24,12 @@ def items_index():
 def item_create():
     # New item form
     if request.method=="GET":
-        return render_template("items/new.html", form = ItemForm(), title = "Add new item", commit = "Add", edit=False)
+        return render_template("items/new.html", form = ItemForm())
 
     # Form validation
     form = ItemForm(request.form)
     if not form.validate():
-        return render_template("items/new.html", form = form, title = "Add new item", commit = "Add", edit=False)
+        return render_template("items/new.html", form = form)
 
     # Adding new item to db
     item = Item(form.name.data)

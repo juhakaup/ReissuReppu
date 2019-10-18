@@ -20,8 +20,8 @@
                 <td> <a href="{{ url_for('view_list',list_id=list.list_id) }}"> {{ list.name }} </a> </td>
                 <td><span class="d-inline-block text-truncate" style="max-width: 250px;">{{ list.description }}</span>
                 </td>
-                <td>{{ list.weight }}</td>
-                <td>{{ list.volume }}</td>
+                <td>{{ list.weight }}g</td>
+                <td>{{ list.volume }}l</td>
                 <td align="center">
                     <div class="btn-group" role="group">
                         <form method="POST" action="{{ url_for('modify_list',list_id=list.list_id) }}">
@@ -59,8 +59,8 @@
                 <td><span class="d-inline-block text-truncate" style="max-width: 250px;">{{ list.description }}</span>
                 </td>
                 <td>{{ list.username }}</td>
-                <td>{{ list.weight }}</td>
-                <td>{{ list.volume }}</td>
+                <td>{{ list.weight }}g</td>
+                <td>{{ list.volume }}l</td>
                 {% if current_user.is_authenticated and current_user.has_role("ADMIN") %}
                 <td align="center">
                     <div class="btn-group" role="group">

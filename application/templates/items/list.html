@@ -22,8 +22,8 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.brand }}</td>
                 <td>{{ item.category }}</td>
-                <td>{{ item.weight }}</td>
-                <td>{{ item.volume }}</td>
+                <td>{{ item.weight }}g</td>
+                <td>{{ item.volume }}l</td>
                 <td>{{ item.description }}</td>
                 <td align="center">
                     <div class="btn-group" role="group">
@@ -53,23 +53,25 @@
                 <th>Weight</th>
                 <th>Volume</th>
                 <th>Description</th>
-                <th class="text-center">Action</th>
+                {% if current_user.is_authenticated %}
+                    <th class="text-center">Action</th>
+                    {% endif %}
             </thead>
             {% for item in items %}
             <tr>
                 <td>{{ item.name }}</td>
                 <td>{{ item.brand }}</td>
                 <td>{{ item.category }}</td>
-                <td>{{ item.weight }}</td>
-                <td>{{ item.volume }}</td>
+                <td>{{ item.weight }}g</td>
+                <td>{{ item.volume }}l</td>
                 <td>{{ item.description }}</td>
+                {% if current_user.is_authenticated %}
                 <td>
-                    {% if current_user.is_authenticated %}
                     <form method="POST" action="{{ url_for('item_copy', item_id=item.id) }}">
-                        <input type="submit" value="Add to my items" class="btn btn-sm btn-outline-success" />
+                        <input type="submit" value="Copy" class="btn btn-sm btn-outline-success" />
                     </form>
-                    {% endif %}
                 </td>
+                {% endif %}
 
             </tr>
             {% endfor %}

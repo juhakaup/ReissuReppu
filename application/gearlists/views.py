@@ -32,6 +32,10 @@ def list_create():
 
     # adding new gearlist to db
     form = ListsForm(request.form)
+    
+    if not form.validate():
+        return render_template("gearlists/new.html", form = form)
+
     gearlist = GearList(name=form.name.data, user_id=current_user.id, description=form.description.data)
     db.session().add(gearlist)
     db.session().commit()
@@ -65,6 +69,10 @@ def update_list(list_id):
         return redirect(url_for("lists_index"))
 
     form = ListsForm(request.form)
+    if not form.validate():
+        return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, 
+                            availableItems = gearlist.available_items(gearlist.user_id), form = form)
+
     gearlist.name = form.name.data
     gearlist.description = form.description.data
     db.session.commit()
