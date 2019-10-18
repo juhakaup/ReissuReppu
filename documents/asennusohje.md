@@ -49,9 +49,16 @@ Avaa tietokanta sqlite3:lla ja lisää käyttäjäroolit.
 	sqlite> INSERT INTO role (role) VALUES ('ADMIN'), ('USER');
 	sqlite> .exit
 
-
 Sovellusta voi nyt käyttää nettiselaimella osoitteessa: http://127.0.0.1:5000/
 
+**Administrator oikeuksien lisääminen käyttäjälle**
+
+Jotta sovelluksen admin-tason työkaluihin pääsisi käsiksi, täytyy jonkin käyttäjän rooleihin lisätä tämä taso. Tämä onnistuu jälleen sqliten avulla. Esimerkissä lisätään käyttäjätaso käyttäjälle jonka id on 1.
+
+	$ sqlite3 application/gearlists.db 
+	sqlite> INSERT INTO user_roles (user_id, role_id) VALUES (1,1);
+	sqlite> .exit
+	
 #### Asentaminen Herokuun
 Asenna ohjelma ensin paikallisesti, yllä olevien ohjeiden mukaan.
 

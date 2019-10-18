@@ -1,10 +1,12 @@
 #Parannuksia ja puuttuvia featureita
 
-**Puutteita**
+**Puutteita ja bugeja**
 
 + Varustelistan nimen ja kuvauksen päivityksestä puuttu ilmoitus. Yleensäkin ilmoituksia voisi parantaa.
 
 + Varusteen, varustelistan tai käyttäjän poistamista ei varmenneta.
+
++ Desimaalit bugittavat paikoitellen.
 
 + Käyttäjän ja varustelistan poistamisen yhteydessä pitäisi vielä tutkia  miten olisi järkevä toimia riippuvuuksien kanssa. Nyt tietokannan riippuvuuden poistetaan koodilla, mikä ei tunnu kovin siistiltä, tietokantaan on ilmeisesti mahdollista lisätä tieto miten toimia näissä tapauksissa, mutten ehtinyt saada sitä tässä toimimaan.
 
@@ -20,3 +22,5 @@
 + Listoihin voisi lisätä myös jonkinlaisen kommentointikentän, johon muutkin käyttäjät voisivat lisätä kommentteja.
 
 + Tietyn käyttäjän varustelistojen listaaminen.
+
++ Adminille lisää työkaluja.
