@@ -8,7 +8,7 @@
     <h5>User gearlists</h5>
     <div class="table-scroll-y table-scrollable">
         <table class="table table-sm table-striped">
-            <thead>
+            <thead class="thead-light">
                 <th>Name</th>
                 <th>Desciption</th>
                 <th>Weight</th>
@@ -24,7 +24,7 @@
                 <td>{{ list.volume }}</td>
                 <td align="center">
                     <div class="btn-group" role="group">
-                        <form method="GET" action="{{ url_for('modify_list',list_id=list.list_id) }}">
+                        <form method="POST" action="{{ url_for('modify_list',list_id=list.list_id) }}">
                             <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
                         </form>
                         <form method="POST" action="{{ url_for('delete_list',list_id=list.list_id) }}">
@@ -43,12 +43,15 @@
     <h5>All gearlists</h5>
     <div class="table-scroll-y table-scrollable">
         <table class="table table-sm table-fixed table-striped">
-            <thead>
+            <thead class="thead-light">
                 <th>Name</th>
                 <th>Desciption</th>
                 <th>Created by</th>
                 <th>Weight</th>
                 <th>Volume</th>
+                {% if current_user.is_authenticated and current_user.has_role("ADMIN") %}
+                <th class="text-center">Admin Tools</th>
+                {% endif %}
             </thead>
             {% for list in allLists %}
             <tr>
@@ -58,6 +61,18 @@
                 <td>{{ list.username }}</td>
                 <td>{{ list.weight }}</td>
                 <td>{{ list.volume }}</td>
+                {% if current_user.is_authenticated and current_user.has_role("ADMIN") %}
+                <td align="center">
+                    <div class="btn-group" role="group">
+                        <form method="POST" action="{{ url_for('modify_list',list_id=list.list_id) }}">
+                            <input type="submit" value=&#9998 class="btn btn-transparent" title="Modify gearlist"/>
+                        </form>
+                        <form method="POST" action="{{ url_for('delete_list',list_id=list.list_id) }}">
+                            <input type="submit" value=&#10005 class="btn btn-transparent" title="Delete gearlist"/>
+                        </form>
+                    </div>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
 

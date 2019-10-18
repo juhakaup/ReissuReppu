@@ -22,3 +22,9 @@
     position: 
     sticky; top: 0; 
 }
+
+.btn-transparent {
+
+    background: transparent;
+    border: none !important;
+}​

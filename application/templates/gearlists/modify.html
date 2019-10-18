@@ -5,7 +5,7 @@
 <div style="width: 700px; margin: auto">
     <h3>Edit gearlist</h3>
 
-    
+
 
     <table class="table table-sm table-striped">
         <tr>
@@ -76,26 +76,26 @@
         {% endfor %}
     </table>
     <hr>
-    <div style="width: 700px; margin: auto">
-            <form method="POST" action="{{ url_for('modify_list',list_id=gearlist.id) }}">
-                <div>
-                    {{ form.name.label }}
-                    {{ form.name (class="form-control")}}
-                    <ul>
-                        {% for error in form.name.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div>
-                    {{ form.description.label }}
-                    {{ form.description (class="form-control")}}
-                </div>
-                <p></p>
-                <input type="submit" value="Update name and description" class="btn btn-outline-success" />
-            </form>
+
+    <form method="POST" action="{{ url_for('update_list',list_id=gearlist.id) }}">
+        <div>
+            {{ form.name.label }}
+            {{ form.name (class="form-control")}}
+            <ul>
+                {% for error in form.name.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
         </div>
-        <br>
+        <div>
+            {{ form.description.label }}
+            {{ form.description (class="form-control")}}
+        </div>
+        <p></p>
+        <input type="submit" value="Update name and description" class="btn btn-outline-success" />
+    </form>
+
+    <br>
 
 </div>
 {% endblock %}

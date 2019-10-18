@@ -13,7 +13,7 @@ class GearList(namedCreated):
 
     user_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
     description = db.Column(db.String(500), nullable=False)
-    items = db.relationship('Item', secondary=listItems, backref=db.backref('items'), lazy = 'dynamic') # gearlist <-> items reference
+    items = db.relationship('Item', secondary=listItems, backref=db.backref('items'), lazy = 'dynamic')
 
     def __init__(self, name, user_id, description):
         self.name = name

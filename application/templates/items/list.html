@@ -15,8 +15,7 @@
                 <th>Weight</th>
                 <th>Volume</th>
                 <th>Description</th>
-                <th></th>
-                <th></th>
+                <th class="text-center">Action</th>
             </thead>
             {% for item in userItems %}
             <tr>
@@ -26,15 +25,15 @@
                 <td>{{ item.weight }}</td>
                 <td>{{ item.volume }}</td>
                 <td>{{ item.description }}</td>
-                <td>
-                    <form method="GET" action="{{ url_for('item_edit', item_id=item.id) }}">
-                        <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
-                    </form>
-                </td>
-                <td>
-                    <form method="POST" action="{{ url_for('item_rm', item_id=item.id) }}">
-                        <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger" />
-                    </form>
+                <td align="center">
+                    <div class="btn-group" role="group">
+                        <form method="GET" action="{{ url_for('item_edit', item_id=item.id) }}">
+                            <input type="submit" value="Edit" class="btn btn-sm btn-outline-info" />
+                        </form>
+                        <form method="POST" action="{{ url_for('item_rm', item_id=item.id) }}">
+                                <input type="submit" value="Delete" class="btn btn-sm btn-outline-danger ml-2" />
+                            </form>
+                    </div>
                 </td>
             </tr>
             {% endfor %}
@@ -54,7 +53,7 @@
                 <th>Weight</th>
                 <th>Volume</th>
                 <th>Description</th>
-                <th></th>
+                <th class="text-center">Action</th>
             </thead>
             {% for item in items %}
             <tr>

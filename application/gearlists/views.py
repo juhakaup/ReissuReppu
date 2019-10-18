@@ -29,34 +29,46 @@ def list_create():
     # form for creating new gearlist
     if request.method=="GET":
         return render_template("gearlists/new.html", form = ListsForm())
+
     # adding new gearlist to db
     form = ListsForm(request.form)
     gearlist = GearList(name=form.name.data, user_id=current_user.id, description=form.description.data)
     db.session().add(gearlist)
     db.session().commit()
 
-    return redirect(url_for("modify_list", list_id=gearlist.id))
+    return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, 
+                            availableItems = gearlist.available_items(current_user.id), form = form)
 
-# Modify existing gearlist
-@app.route("/lists/modify/<list_id>", methods=["GET", "POST"])
+# Modify existing gearlist form
+@app.route("/lists/modify/<list_id>", methods=["POST"])
 @login_required
 def modify_list(list_id):
     gearlist = GearList.query.get(list_id)
     
-    if gearlist.user_id != current_user.id:
+    if not (gearlist.user_id == current_user.id or current_user.has_role("ADMIN")):
         return redirect(url_for("lists_index"))
     
     form = ListsForm()
     form.name.data = gearlist.name
     form.description.data = gearlist.description
-    
-    # Update name and description
-    if request.method=="POST":
-        form = ListsForm(request.form)
-        gearlist.name = form.name.data
-        gearlist.description = form.description.data
-        db.session.commit()
 
+    return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, 
+                            availableItems = gearlist.available_items(current_user.id), form = form)
+
+# Update existing gearlist
+@app.route("/lists/<list_id>", methods=["POST"])
+@login_required
+def update_list(list_id):
+    gearlist = GearList.query.get(list_id)
+    
+    if not (gearlist.user_id == current_user.id or current_user.has_role("ADMIN")):
+        return redirect(url_for("lists_index"))
+
+    form = ListsForm(request.form)
+    gearlist.name = form.name.data
+    gearlist.description = form.description.data
+    db.session.commit()
+    
     availableItems = gearlist.available_items(current_user.id)
     return render_template("gearlists/modify.html", gearlist = gearlist, items = gearlist.items, 
                             availableItems = availableItems, form = form)
@@ -66,8 +78,11 @@ def modify_list(list_id):
 @login_required 
 def delete_list(list_id):   
     gearlist = GearList.query.get(list_id)
-    if gearlist.user_id != current_user.id:
+    if not (gearlist.user_id == current_user.id or current_user.has_role("ADMIN")):
         return redirect(url_for("lists_index"))
+    for item in gearlist.items:
+        gearlist.items.remove(item)
+        db.session.commit()
     db.session.delete(gearlist)
     db.session.commit()
     
